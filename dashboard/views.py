@@ -1,10 +1,9 @@
-# dashboard/views.py
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.db.models import Sum
 from budget.models import Income, Expense
 
 def income_expense_graph(request):
-    # Fetch data for both income and expense graphs for the logged-in user
     incomes = Income.objects.filter(user=request.user)
     expenses = Expense.objects.filter(user=request.user)
 
@@ -18,9 +17,14 @@ def income_expense_graph(request):
         'expense_values': [expense.expense_amount for expense in expenses],
     }
 
+    total_income = incomes.aggregate(total=Sum('income_amount'))['total'] or 0
+    total_expense = expenses.aggregate(total=Sum('expense_amount'))['total'] or 0
+
     return render(request, 'income_expense_graph.html', {
         'income_data': income_data,
-        'expense_data': expense_data
+        'expense_data': expense_data,
+        'total_income': total_income,
+        'total_expense': total_expense,
     })
 
 def income_graph(request):
