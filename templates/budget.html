@@ -6,12 +6,12 @@
 {% block content %} 
 
 <div class="budget-container">
-    <div class="row">
+    <div class="row p-4">
         <div class="text-center mb-4">
             <h1>Personal Budget</h1>
         </div>
         
-        <div class="col-md-6">
+        <div class="col-md-6 p-4">
             <h2>Income Sources</h2>
             <form method="post">
                 {% csrf_token %}
@@ -30,9 +30,9 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 p-4">
             <h2>Expenses</h2>
-            <form method="post">
+            <form method="post" class="expense-form">
                 {% csrf_token %}
                 {{ expense_form | crispy }}
                 <button type="submit" name="expense_submit" class="btn btn-danger">Add Expense</button>

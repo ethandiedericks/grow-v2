@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # Local
     'users.apps.UsersConfig',
     'budget',
+    'dashboard',
 ]
 
 # django-allauth config

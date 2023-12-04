@@ -26,4 +26,5 @@ urlpatterns = [
     
     # Local apps
     path('', include('budget.urls')),
+    path('dashboard/', include('dashboard.urls')),
 ]

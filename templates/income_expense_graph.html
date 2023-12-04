@@ -1,0 +1,69 @@
+{% extends '_base.html' %}
+
+
+{% block title %}
+    Income Expense
+{% endblock title %}
+
+
+{% block content %}
+        
+<div style="display: flex; justify-content: space-around;">
+    <div>
+        <h2>Income</h2>
+        <canvas id="incomeChart" width="400" height="400"></canvas>
+    </div>
+    <div>
+        <h2>Expense</h2>
+        <canvas id="expenseChart" width="400" height="400"></canvas>
+    </div>
+</div>
+
+
+
+<script>
+    fetch('/dashboard/income/')
+        .then(response => response.json())
+        .then(data => {
+            var ctx1 = document.getElementById('incomeChart').getContext('2d');
+            var myChart1 = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Income Sources',
+                        data: data.values,
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    // Add options here if needed
+                }
+            });
+        });
+
+    fetch('/dashboard/expense/')
+        .then(response => response.json())
+        .then(data => {
+            var ctx2 = document.getElementById('expenseChart').getContext('2d');
+            var myChart2 = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Expense Types',
+                        data: data.values,
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    // Add options here if needed
+                }
+            });
+        });
+</script>
+{% endblock content %}
