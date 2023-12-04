@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'Lato';
+    src: url('/static/fonts/Lato-Regular.ttf') format('truetype');
+    /* Add more src declarations for different font weights/styles if needed */
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    /* Apply the Noto Sans font as the default font */
+}
+
+input:focus {
+    border-color: #10a37f !important; /* Change to your preferred shade of green */
+    box-shadow: 0 0 0 0.2rem rgba(0, 166, 126, 0.25) !important; /* Optional: Add a slight shadow effect */
+}
+
+/* This will change the color of Bootstrap buttons */
+.btn-custom {
+    color: #fff;
+    background-color: #10a37f;
+    border-color: #10a37f;
+}
+
+/* This will change the hover and active states of Bootstrap buttons */
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active {
+    background-color: #0e9171; /* Darker shade for hover and active states */
+    border-color: #0e9171;
+    color: #fff;
+}
