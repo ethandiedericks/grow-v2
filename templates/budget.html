@@ -1,7 +1,57 @@
 {% extends '_base.html' %}
-
+{% load static %}
+{% load crispy_forms_tags%}
 {% block title %}Budget{% endblock title %}
 
 {% block content %} 
-    <h1>Budget Page</h1>
+
+<div class="budget-container">
+    <div class="row">
+        <div class="text-center mb-4">
+            <h1>Personal Budget</h1>
+        </div>
+        
+        <div class="col-md-6">
+            <h2>Income Sources</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ income_form | crispy }}
+                <button type="submit" name="income_submit" class="btn btn-custom">Add Income</button>
+            </form>
+            <div class="mt-4">
+                <h3>Existing Incomes</h3>
+                <ul>
+                    {% for income in incomes %}
+                        <li>
+                            {{ income.income_name }} - {{ income.income_amount }}
+                            <a href="{% url 'delete_income' income.id %}"><i class="fa-solid fa-trash" style="color: #dc3545;"></i></a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2>Expenses</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ expense_form | crispy }}
+                <button type="submit" name="expense_submit" class="btn btn-danger">Add Expense</button>
+            </form>
+            <div class="mt-4">
+                <h3>Existing Expenses</h3>
+                <ul>
+                    {% for expense in expenses %}
+                        <li>
+                            {{ expense.expense_name }} - {{ expense.expense_amount }}
+                            <a href="{% url 'delete_expense' expense.id %}"><i class="fa-solid fa-trash" style="color: #dc3545;"></i></a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+   
+
+
 {% endblock content %}
