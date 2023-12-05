@@ -1,37 +1,27 @@
 {% extends '_base.html' %}
-{%load static%}
+{% load static %}
 
 {% block title %}
     Home
 {% endblock title %}
-    
+
 
 {% block content %}
-    <style>
-        /* Custom CSS for additional styling */
-        .welcome-text {
-            margin-top: 100px;
-            text-align: center;
-        }
-        .btn {
-            margin-top: 10px;
-        }
-    </style>
     <div class="row">
         <div class="col-md-12">
-            <div class="welcome-text">
-                <img src="{% static 'images/grow2.png' %}" alt="" class="img-fluid mb-2">
-                <h1><strong>Welcome!</strong></h1>
+            <div class="welcome-section">
+                <img src="{% static 'images/grow2.png' %}" alt="Grow Image" class="img-fluid mb-4">
+                <h1>Welcome to Financial Freedom</h1>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'budget' %}" class="btn btn-primary">Create a budget</a>
+                    <p>Ready to take control of your finances?</p>
+                    <a href="{% url 'budget' %}" class="btn btn-custom">Create a Budget</a>
                 {% else %}
                     <p>Start managing your finances and planning for the future.</p>
                     <p>Sign up or log in to get started.</p>
-                    <a href="{% url 'account_signup' %}" class="btn btn-custom ">Sign Up</a>
-                    <a href="{% url 'account_login' %}" class="btn btn-custom ">Log In</a>
+                    <a href="{% url 'account_signup' %}" class="btn btn-custom">Sign Up</a>
+                    <a href="{% url 'account_login' %}" class="btn btn-primary">Log In</a>
                 {% endif %}
             </div>
         </div>
     </div>
 {% endblock content %}
-    

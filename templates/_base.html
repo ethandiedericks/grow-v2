@@ -23,8 +23,11 @@
       {% include 'header.html' %}
     {% endif %}
     
-        {% block content %}
-        {% endblock content %}
+    {% block extra_css %}
+    {% endblock extra_css %}
+
+    {% block content %}
+    {% endblock content %}
     
     <!-- Your existing HTML code -->
 

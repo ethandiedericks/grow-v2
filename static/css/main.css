@@ -9,6 +9,12 @@ body {
     /* Apply the Noto Sans font as the default font */
 }
 
+
+
+
+
+/*------- CSS for budget page --------*/
+
 input:focus {
     border-color: #10a37f !important; /* Change to your preferred shade of green */
     box-shadow: 0 0 0 0.2rem rgba(0, 166, 126, 0.25) !important; /* Optional: Add a slight shadow effect */
@@ -44,11 +50,17 @@ input:focus {
     box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
 }
 
-/* Reset expense input border when not focused */
 .expense-form .form-control:not(:focus) {
     border-color: #ced4da; /* Default Bootstrap input border color */
     box-shadow: none; /* Remove the shadow when not focused */
 }
+
+
+
+
+
+/*------- CSS for dashboard page --------*/
+
 .custom-income-color {
     background-color: #10a37f;
 }
@@ -62,4 +74,184 @@ input:focus {
     position: relative; 
     height:40vh; 
     width:100%;
+}
+
+/*------- CSS for home page --------*/
+.welcome-section {
+    margin-top: 100px;
+    text-align: center;
+    padding: 80px 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+.welcome-section h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #333;
+}
+.welcome-section p {
+    font-size: 20px;
+    margin-bottom: 40px;
+    color: #555;
+}
+.btn {
+    margin-top: 20px;
+    padding: 10px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+
+
+
+
+/*-------- CSS for logout page --------*/
+
+.logout-container {
+    margin-top: 100px;
+    text-align: center;
+    padding: 40px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+.logout-container h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+.logout-container p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+
+
+.logout-btn,
+.cancel-logout-btn {
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    transition: all 0.1s ease;
+}
+.logout-btn:hover {
+    background-color: #d9534f;
+    border: 2px solid #d9534f;
+}
+.cancel-logout-btn:hover {
+    background-color: #6c757d;
+    border: 2px solid #6c757d;
+}
+
+
+
+/*-------- CSS for login ---------*/
+
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-card {
+    width: 350px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.login-card-body {
+    padding: 40px;
+}
+.card-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+.bi-box-arrow-in-right {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+    color: #007bff; /* You can adjust the color if needed */
+}
+
+.btn-custom-login {
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    background-color: #007bff; /* You can adjust the color if needed */
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+.btn-custom-login:hover {
+    background-color: #0056b3; /* You can adjust the color if needed */
+    color: white;
+}
+.btn-back {
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    background-color: #dc3545; /* You can adjust the color if needed */
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+.btn-back:hover {
+    background-color: #bb2d3b; /* You can adjust the color if needed */
+    color: white;
+}
+
+/*------- CSS for sign up page ------*/
+
+.signup-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.signup-card {
+    width: 350px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.signup-card-body {
+    padding: 40px;
+}
+.card-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+.bi-person-plus {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+    color: #10a37f; /* You can adjust the color if needed */
+}
+
+
+.btn-custom-signup {
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    background-color: #10a37f; /* You can adjust the color if needed */
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+.btn-custom-signup:hover {
+    background-color: #0f8769; /* You can adjust the color if needed */
+}
+.btn-back {
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    background-color: #dc3545; /* You can adjust the color if needed */
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+.btn-back:hover {
+    background-color: #bb2d3b; /* You can adjust the color if needed */
 }
