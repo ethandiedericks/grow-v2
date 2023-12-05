@@ -49,3 +49,17 @@ input:focus {
     border-color: #ced4da; /* Default Bootstrap input border color */
     box-shadow: none; /* Remove the shadow when not focused */
 }
+.custom-income-color {
+    background-color: #10a37f;
+}
+.pie-chart-container{
+    position: relative; 
+    height:40vh; 
+    width:100%;
+}
+
+.bar-chart-container{
+    position: relative; 
+    height:40vh; 
+    width:100%;
+}

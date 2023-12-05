@@ -14,6 +14,10 @@ def budget_view(request):
     incomes = Income.objects.filter(user=request.user)
     expenses = Expense.objects.filter(user=request.user)
 
+    total_income = sum(income.income_amount for income in incomes)
+    total_expenses = sum(expense.expense_amount for expense in expenses)
+    remaining_balance = total_income - total_expenses
+    
     if request.method == 'POST':
         if 'income_submit' in request.POST:
             form = IncomeForm(request.POST)
@@ -38,6 +42,9 @@ def budget_view(request):
         'expenses': expenses,
         'income_form': income_form,
         'expense_form': expense_form,
+        'total_income': total_income,
+        'total_expenses': total_expenses,
+        'remaining_balance': remaining_balance,
     })
     
 def delete_income(request, income_id):
