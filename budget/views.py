@@ -38,7 +38,7 @@ def budget_view(request):
         income_form = IncomeForm()
         expense_form = ExpenseForm()
 
-    return render(request, 'budget.html', {
+    return render(request, 'budget/budget.html', {
         'incomes': incomes,
         'expenses': expenses,
         'income_form': income_form,

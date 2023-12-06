@@ -3,37 +3,44 @@ document.addEventListener('DOMContentLoaded', function() {
     // pie chart
 
     fetch('/dashboard/income/')
-        .then(response => response.json())
-        .then(data => {
-            var incomeData = data.income_data || {};
-            var expenseData = data.expense_data || {};
+    .then(response => response.json())
+    .then(data => {
+        var incomeData = data.income_data || {};
+        var expenseData = data.expense_data || {};
 
-            console.log('Income Data:', incomeData);
-            console.log('Expense Data:', expenseData);
+        console.log('Income Data:', incomeData);
+        console.log('Expense Data:', expenseData);
 
-            var allLabels = incomeData.labels.concat(expenseData.labels);
-            var allValues = incomeData.values.concat(expenseData.values);
+        var allLabels = incomeData.labels.concat(expenseData.labels);
+        var allValues = incomeData.values.concat(expenseData.values);
 
-            var colors = generateVibrantColors(allLabels.length);
+        var colors = generateVibrantColors(allLabels.length);
 
-            var ctx1 = document.getElementById('incomeVsExpenseChart').getContext('2d');
-            var myChart1 = new Chart(ctx1, {
-                type: 'pie',
-                data: {
-                    labels: allLabels,
-                    datasets: [{
-                        data: allValues,
-                        backgroundColor: colors.backgroundColor,
-                        borderColor: colors.borderColor,
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    // Add options here if needed
+        var ctx1 = document.getElementById('incomeVsExpenseChart').getContext('2d');
+        var myChart1 = new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: allLabels,
+                datasets: [{
+                    data: allValues,
+                    backgroundColor: colors.backgroundColor,
+                    borderColor: colors.borderColor,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false // Hide the legend
+                    },
                 }
-            });
-
+            }
         });
+       
+    });
+
 
         // doughnut chart
 
@@ -65,7 +72,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     }]
                 },
                 options: {
-                    // Add options here if needed
+                    responsive: true,
+                    maintainAspectRatio: false,
                 }
             });
 
@@ -92,10 +100,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             borderColor: 'rgba(255, 99, 132, 1)',
                             borderWidth: 1
                         }
-                        // Add more datasets if you have stacked data
                     ]
                 },
                 options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
                     scales: {
                         y: {
                             stacked: true // Enable stacking on the y-axis

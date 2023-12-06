@@ -29,7 +29,7 @@ def dashboard(request):
     formatted_total_income = "{:,.2f}".format(total_income)
     formatted_total_expense = "{:,.2f}".format(total_expense)
     
-    return render(request, 'dashboard.html', {
+    return render(request, 'dashboard/dashboard.html', {
         'incomes': incomes,
         'expenses': expenses,
         'income_data': income_data,
