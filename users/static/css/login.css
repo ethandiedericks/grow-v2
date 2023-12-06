@@ -1,0 +1,57 @@
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-card {
+    width: 350px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.login-card-body {
+    padding: 40px;
+}
+/* Input focus style for login page only */
+.login-card-body input:focus {
+    border-color: #007bff !important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6) !important;
+}
+.login-card-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+.bi-box-arrow-in-right {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+    color: #007bff; /* You can adjust the color if needed */
+}
+
+.btn-custom-login {
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    background-color: #007bff; /* You can adjust the color if needed */
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+.btn-custom-login:hover {
+    background-color: #0056b3; /* You can adjust the color if needed */
+    color: white;
+}
+.btn-back {
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    background-color: #dc3545; /* You can adjust the color if needed */
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+.btn-back:hover {
+    background-color: #bb2d3b; /* You can adjust the color if needed */
+    color: white;
+}

@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from .forms import IncomeForm, ExpenseForm
 from .models import Income, Expense
@@ -9,7 +10,7 @@ class HomePageView(TemplateView):
     template_name = 'home.html'
     
 
-
+@login_required
 def budget_view(request):
     incomes = Income.objects.filter(user=request.user)
     expenses = Expense.objects.filter(user=request.user)
@@ -46,13 +47,15 @@ def budget_view(request):
         'total_expenses': total_expenses,
         'remaining_balance': remaining_balance,
     })
-    
+
+@login_required    
 def delete_income(request, income_id):
     income = get_object_or_404(Income, id=income_id)
     if income.user == request.user:
         income.delete()
     return redirect('budget')
 
+@login_required
 def delete_expense(request, expense_id):
     expense = get_object_or_404(Expense, id=expense_id)
     if expense.user == request.user:

@@ -5,12 +5,12 @@
     Home
 {% endblock title %}
 
-
 {% block content %}
+
     <div class="row">
         <div class="col-md-12">
             <div class="welcome-section">
-                <img src="{% static 'images/grow2.png' %}" alt="Grow Image" class="img-fluid mb-4">
+                <img src="{% static 'img/grow2.png' %}" alt="Grow Image" class="img-fluid mb-4">
                 <h1>Welcome to Financial Freedom</h1>
                 {% if user.is_authenticated %}
                     <p>Ready to take control of your finances?</p>
@@ -24,4 +24,5 @@
             </div>
         </div>
     </div>
+
 {% endblock content %}

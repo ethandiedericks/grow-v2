@@ -6,20 +6,26 @@
 {% endblock title %}
 
 {% block content %}
+
 <div class="container mt-4">
+    <!-- income and expense total cards -->
     <div class="row">
+    
+        <!-- total income card -->
         <div class="col-md-6 mb-4">
             <div class="card custom-income-color text-white">
                 <div class="card-body d-flex justify-content-center align-items-center">
                     <i class="fa-solid fa-hand-holding-dollar fa-3x me-3"></i>
                     <div class="mx-3">
                         <h5 class="card-title mb-0">Total Income</h5>
-                        <h3 class="card-value"><strong>{{ total_income }}</strong></h3>
+                        <h3 class="card-value"><strong> {{ total_income }}</strong></h3>
                         <p class="card-text">Breakdown: Salary, Investments, Other</p>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- total expense card -->
         <div class="col-md-6 mb-4">
             <div class="card bg-danger text-white">
                 <div class="card-body d-flex justify-content-center align-items-center">
@@ -34,17 +40,36 @@
         </div>
     </div>
 
+    <!-- graphs row -->
     <div class="row">
-        <div class="col-md-6 d-flex align-items-center justify-content-center mt-4">
+
+        <!-- pie chart for individual incomes vs individual expenses -->
+        <div class="col-md-3 d-flex align-items-center justify-content-center mt-4">
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title text-center">Income vs Expenses</h2>
                     <div class="pie-chart-container">
                         <canvas id="incomeVsExpenseChart"></canvas>
+                 
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- doughnut chart for total incomes vs total expenses -->
+        <div class="col-md-3 d-flex align-items-center justify-content-center mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Total Income vs Total Expenses</h2>
+                    <div class="pie-chart-container">
+                        
+                        <canvas id="doughnut"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- bar chart for individual expenses -->
         <div class="col-md-6 mt-4">
             <div class="card">
                 <div class="card-body">
@@ -57,8 +82,10 @@
         </div>
     </div>
     
-
+    <!-- row for the details table -->
     <div class="row mt-4">
+
+        <!-- column for table -->
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
@@ -101,4 +128,5 @@
         </div>
     </div>
 </div>
+
 {% endblock content %}

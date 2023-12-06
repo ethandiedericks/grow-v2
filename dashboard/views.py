@@ -1,8 +1,12 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.db.models import Sum
+
+
 from budget.models import Income, Expense
 
+@login_required
 def dashboard(request):
     incomes = Income.objects.filter(user=request.user)
     expenses = Expense.objects.filter(user=request.user)
@@ -34,10 +38,13 @@ def dashboard(request):
         'total_expense': formatted_total_expense,
     })
 
+@login_required
 def income_graph(request):
     incomes = Income.objects.filter(user=request.user)
     expenses = Expense.objects.filter(user=request.user)
 
+    total_income = incomes.aggregate(total=Sum('income_amount'))['total'] or 0
+    total_expense = expenses.aggregate(total=Sum('expense_amount'))['total'] or 0
     # Income data
     income_data = {
         'labels': [income.income_name for income in incomes],
@@ -50,9 +57,14 @@ def income_graph(request):
         'values': [expense.expense_amount for expense in expenses],
     }
 
-    return JsonResponse({'income_data': income_data, 'expense_data': expense_data})
+    return JsonResponse({
+        'income_data': income_data, 
+        'expense_data': expense_data,
+        'total_income': total_income,
+        'total_expense': total_expense,
+        })
 
-
+@login_required
 def expense_graph(request):
     expenses = Expense.objects.filter(user=request.user)
 

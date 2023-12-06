@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+
+    // pie chart
+
     fetch('/dashboard/income/')
         .then(response => response.json())
         .then(data => {
@@ -32,39 +35,79 @@ document.addEventListener('DOMContentLoaded', function() {
 
         });
 
+        // doughnut chart
 
-    fetch('/dashboard/expense/')
+        fetch('/dashboard/income/')
         .then(response => response.json())
         .then(data => {
-            var ctx2 = document.getElementById('expenseChart').getContext('2d');
+            var totalIncome = data.total_income || 0;
+            var totalExpense = data.total_expense || 0;
 
-            var expenseChart = new Chart(ctx2, {
-                type: 'bar',
+            console.log('Total Income:', totalIncome);
+            console.log('Total Expense:', totalExpense);
+
+            var ctx1 = document.getElementById('doughnut').getContext('2d');
+            var myChart1 = new Chart(ctx1, {
+                type: 'doughnut',
                 data: {
-                    labels: data.labels,
+                    labels: ['Total Income', 'Total Expenses'],
                     datasets: [{
-                        label: 'Expenses',
-                        data: data.values,
-                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
+                        data: [totalIncome, totalExpense],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.5)', // Color for Total Income
+                            'rgba(255, 99, 132, 0.5)' // Color for Total Expenses
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
                         borderWidth: 1
                     }]
                 },
                 options: {
+                    // Add options here if needed
+                }
+            });
+
+        });
+
+    
+
+        // bar chart
+
+        fetch('/dashboard/expense/')
+        .then(response => response.json())
+        .then(data => {
+            var ctx2 = document.getElementById('expenseChart').getContext('2d');
+    
+            var expenseChart = new Chart(ctx2, {
+                type: 'bar', // Change the type to 'bar' for a stacked bar chart
+                data: {
+                    labels: data.labels,
+                    datasets: [
+                        {
+                            label: 'Expenses',
+                            data: data.values,
+                            backgroundColor: 'rgba(255, 99, 132, 0.5)', // Change colors as needed
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }
+                        // Add more datasets if you have stacked data
+                    ]
+                },
+                options: {
                     scales: {
                         y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Expense Amount'
-                            }
+                            stacked: true // Enable stacking on the y-axis
+                        },
+                        x: {
+                            stacked: true // Enable stacking on the x-axis
                         }
                     }
                 }
             });
-
-        
         });
+    
 });
 
 function generateVibrantColors(count) {

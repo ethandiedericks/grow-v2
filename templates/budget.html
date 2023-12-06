@@ -1,7 +1,10 @@
 {% extends '_base.html' %}
 {% load static %}
-{% load crispy_forms_tags%}
-{% block title %}Budget{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Budget
+{% endblock title %}
 
 {% block content %} 
 
@@ -10,7 +13,8 @@
         <div class="text-center mb-4">
             <h1>Personal Budget</h1>
         </div>
-        
+
+        <!-- incomes sources form -->
         <div class="col-md-6 p-4">
             <h2>Income Sources</h2>
             <form method="post">
@@ -18,6 +22,8 @@
                 {{ income_form | crispy }}
                 <button type="submit" name="income_submit" class="btn btn-custom">Add Income</button>
             </form>
+
+            <!-- display existing incomes -->
             <div class="mt-4">
                 <h3>Existing Incomes</h3>
                 <ul>
@@ -30,6 +36,8 @@
                 </ul>
             </div>
         </div>
+
+        <!-- expense form -->
         <div class="col-md-6 p-4">
             <h2>Expenses</h2>
             <form method="post" class="expense-form">
@@ -37,6 +45,7 @@
                 {{ expense_form | crispy }}
                 <button type="submit" name="expense_submit" class="btn btn-danger">Add Expense</button>
             </form>
+            <!-- display existing expenses -->
             <div class="mt-4">
                 <h3>Existing Expenses</h3>
                 <ul>
@@ -50,10 +59,10 @@
             </div>
         </div>
     </div>
+    
     <div class="row">
         <div class="col-md-6 p-4">
             <h4>Total Income: {{ total_income }}</h4>
-            
         </div>
         <div class="col-md-6 p-4">
             <h4>Total Expenses: {{ total_expenses }}</h4>
@@ -61,7 +70,5 @@
         </div>
     </div>
 </div>
-   
-
 
 {% endblock content %}
