@@ -15,14 +15,22 @@
         </div>
 
         <!-- incomes sources form -->
-        <div class="col-md-6 p-4">
+        <div class="col-md-4 p-4">
             <h2>Income Sources</h2>
-            <form method="post">
+            
+            <form method="post" id="incomeForm">
                 {% csrf_token %}
-                {{ income_form | crispy }}
+                <div class="form-group">
+                    {{ income_form.income_name|as_crispy_field }}
+                </div>
+                <div class="form-group custom-income-group d-none">
+                    <small id="customIncomeHelp" class="form-text text-muted">Can't find your income? Add it here:</small>
+                    <input type="text" class="form-control" id="customIncome" name="custom_income" placeholder="Enter your custom income">
+                </div>
+                {{ income_form.income_amount|as_crispy_field }}
+                {{ income_form.future_income_date|as_crispy_field }}
                 <button type="submit" name="income_submit" class="btn btn-custom">Add Income</button>
             </form>
-
             <!-- display existing incomes -->
             <div class="mt-4">
                 <h3>Existing Incomes</h3>
@@ -38,11 +46,19 @@
         </div>
 
         <!-- expense form -->
-        <div class="col-md-6 p-4">
+        <div class="col-md-4 p-4">
             <h2>Expenses</h2>
-            <form method="post" class="expense-form">
+            <form method="post" id="expenseForm" class="expense-form">
                 {% csrf_token %}
-                {{ expense_form | crispy }}
+                <div class="form-group">
+                    {{ expense_form.expense_name|as_crispy_field }}
+                </div>
+                <div class="form-group custom-expense-group d-none">
+                    <small id="customIncomeHelp" class="form-text text-muted">Can't find your expense? Add it here:</small>
+                    <input type="text" class="form-control" id="customExpense" name="custom_expense" placeholder="Enter your custom expense">
+                </div>
+                {{ expense_form.expense_amount|as_crispy_field }}
+                {{ expense_form.future_expense_date|as_crispy_field }}
                 <button type="submit" name="expense_submit" class="btn btn-danger">Add Expense</button>
             </form>
             <!-- display existing expenses -->
@@ -58,17 +74,74 @@
                 </ul>
             </div>
         </div>
+
+        <!-- investment form -->
+        <div class="col-md-4 p-4">
+            <h2>Investments</h2>
+            <form method="post" id="investmentForm" class="investment-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ investment_form.investment_name|as_crispy_field }}
+                </div>
+                <div class="form-group custom-investment-group d-none">
+                    <small id="customInvestmentHelp" class="form-text text-muted">Can't find your investment? Add it here:</small>
+                    <input type="text" class="form-control" id="customInvestment" name="custom_investment" placeholder="Enter your custom investment">
+                </div>
+                {{ investment_form.investment_amount|as_crispy_field }}
+                {{ investment_form.future_investment_date|as_crispy_field }}
+                <button type="submit" name="investment_submit" class="btn btn-primary">Add Investment</button>
+            </form>
+            <!-- display existing investments -->
+            <div class="mt-4">
+                <h3>Existing Investments</h3>
+                <ul>
+                    {% for investment in investments %}
+                        <li>
+                            {{ investment.investment_name }} - {{ investment.investment_amount }}
+                            <a href="{% url 'delete_investment' investment.id %}"><i class="fa-solid fa-trash" style="color: #dc3545;"></i></a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
     
     <div class="row">
-        <div class="col-md-6 p-4">
+        <div class="col-md-4 p-4">
             <h4>Total Income: {{ total_income }}</h4>
         </div>
-        <div class="col-md-6 p-4">
+        <div class="col-md-4 p-4">
             <h4>Total Expenses: {{ total_expenses }}</h4>
             <h4>Remaining Balance: {{ remaining_balance }}</h4>
         </div>
+        <div class="col-md-4 p-4">
+            <h4>Total Investments: {{ total_investments }}</h4>
+        </div>
     </div>
 </div>
+<!-- <script type="text/javascript">
+   document.addEventListener('DOMContentLoaded', function() {
+    // Retrieve custom income from localStorage
+    let customIncome = localStorage.getItem('customIncome');
+    
+    // Get the income dropdown element
+    let incomeDropdown = document.getElementById('id_income_name');
+    
+    // Check if the custom income is not null and not already present in the dropdown
+    if (customIncome && !Array.from(incomeDropdown.options).some(option => option.value === customIncome)) {
+        // Create an option for the custom income
+        let customIncomeOption = new Option(customIncome, customIncome);
 
+        // Add the custom income option to the top of the dropdown
+        incomeDropdown.insertBefore(customIncomeOption, incomeDropdown.firstChild);
+    }
+});
+
+// Save the custom income to localStorage when input changes
+document.getElementById('customIncome').addEventListener('input', function() {
+    let customIncome = this.value;
+    localStorage.setItem('customIncome', customIncome);
+});
+
+</script> -->
 {% endblock content %}

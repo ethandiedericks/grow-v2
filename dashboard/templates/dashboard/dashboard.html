@@ -81,52 +81,7 @@
             </div>
         </div>
     </div>
-    
-    <!-- row for the details table -->
-    <div class="row mt-4">
 
-        <!-- column for table -->
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="card-title">Income and Expense Details</h2>
-                    <div class="table-responsive">
-                        <table class="table table-borderless table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Description</th>
-                                    <th>Category</th>
-                                    <th>Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Loop through income data -->
-                                {% for income in incomes %}
-                                <tr>
-                                    <td>{{ income.date_created }}</td>
-                                    <td>{{ income.income_name }}</td>
-                                    <td>Income</td>
-                                    <td>{{ income.income_amount }}</td>
-                                </tr>
-                                {% endfor %}
-                                <!-- Loop through expense data -->
-                                {% for expense in expenses %}
-                                <tr>
-                                    <td>{{ expense.date_created }}</td>
-                                    <td>{{ expense.expense_name }}</td>
-                                    <td>Expense</td>
-                                    <td>{{ expense.expense_amount }}</td>
-                                </tr>
-                                {% endfor %}
-                                <!-- Add more rows as needed -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 {% endblock content %}

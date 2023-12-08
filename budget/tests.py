@@ -1,7 +1,7 @@
 from django.test import SimpleTestCase
 from django.urls import reverse, resolve
 
-from .views import HomePageView, BudgetPageView
+from .views import HomePageView, budget_view
 
 # Create your tests here.
 class HomePageTests(SimpleTestCase):
@@ -18,7 +18,7 @@ class HomePageTests(SimpleTestCase):
         self.assertTemplateUsed('home.html')
         
     def test_homepage_contains_correct_html(self):
-        self.assertContains(self.response, 'Homepage')
+        self.assertContains(self.response, 'Welcome to Financial Freedom')
         
     def test_homepage_url_resolves_homepageview(self):
         view = resolve('/')
@@ -44,4 +44,4 @@ class BudgetPageTests(SimpleTestCase):
         
     def test_budgetpage_url_resolves_aboutpageview(self): 
         view = resolve('/budget/')
-        self.assertEqual(view.func.__name__, BudgetPageView.as_view().__name__)
+        self.assertEqual(view.func.__name__, budget_view.__name__)

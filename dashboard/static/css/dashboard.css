@@ -1,3 +1,5 @@
+
+/* cards */
 .custom-income-color {
     background-color: #10a37f;
 }
@@ -15,4 +17,17 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* charts */
+.pie-chart-container{
+    position: relative; 
+    height:40vh; 
+    width:100%;
+}
+
+.bar-chart-container{
+    position: relative; 
+    height:44.5vh; 
+    width:100%;
 }

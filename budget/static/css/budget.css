@@ -1,0 +1,43 @@
+.budget-container {
+    background-color: #f2f2f2; /* Light gray color */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Add some padding for better spacing */
+    margin: 20px auto; /* Center the container */
+    /* You might need to adjust the width if needed */
+    max-width: 1400px; /* Adjust the width based on your design */
+}
+
+.btn-custom {
+    color: #fff;
+    background-color: #10a37f;
+    border-color: #10a37f;
+}
+
+/* This will change the hover and active states of Bootstrap buttons */
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active {
+    background-color: #0e9171; /* Darker shade for hover and active states */
+    border-color: #0e9171;
+    color: #fff;
+}
+
+.expense-form .form-control:focus {
+    border-color: red !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+}
+
+.expense-form .form-control:not(:focus) {
+    border-color: #ced4da; /* Default Bootstrap input border color */
+    box-shadow: none; /* Remove the shadow when not focused */
+}
+
+.investment-form .form-control:focus {
+    border-color: #007bff !important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6) !important;
+}
+
+.investment-form .form-control:not(:focus) {
+    border-color: #ced4da; /* Default Bootstrap input border color */
+    box-shadow: none; /* Remove the shadow when not focused */
+}
