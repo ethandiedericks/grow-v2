@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             if (selectedChartId) {
-                document.getElementById(selectedChartId).style.display = 'block';
+                document.getElementById(selectedChartId).style.display = 'flex';
             }
 
             // Fetch data and render the selected chart
