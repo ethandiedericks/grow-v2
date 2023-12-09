@@ -34,14 +34,27 @@
             <!-- display existing incomes -->
             <div class="mt-4">
                 <h3>Existing Incomes</h3>
-                <ul>
+                <div class="row">
                     {% for income in incomes %}
-                        <li>
-                            {{ income.income_name }} - {{ income.income_amount }}
-                            <a href="{% url 'delete_income' income.id %}"><i class="fa-solid fa-trash" style="color: #dc3545;"></i></a>
-                        </li>
+                        <div class="col-md-6 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ income.income_name }}</h5>
+                                    <p class="card-text text-muted">Amount: {{ income.income_amount }}</p>
+                                    <a href="{% url 'delete_income' income.id %}" class="text-danger">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="col-md-12">
+                            <div class="card text-center p-3">
+                                <p class="text-muted mb-0">No existing incomes</p>
+                            </div>
+                        </div>
                     {% endfor %}
-                </ul>
+                </div>
             </div>
         </div>
 
@@ -64,14 +77,27 @@
             <!-- display existing expenses -->
             <div class="mt-4">
                 <h3>Existing Expenses</h3>
-                <ul>
+                <div class="row">
                     {% for expense in expenses %}
-                        <li>
-                            {{ expense.expense_name }} - {{ expense.expense_amount }}
-                            <a href="{% url 'delete_expense' expense.id %}"><i class="fa-solid fa-trash" style="color: #dc3545;"></i></a>
-                        </li>
+                        <div class="col-md-6 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ expense.expense_name }}</h5>
+                                    <p class="card-text text-muted">Amount: {{ expense.expense_amount }}</p>
+                                    <a href="{% url 'delete_expense' expense.id %}" class="text-danger">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="col-md-12">
+                            <div class="card text-center p-3">
+                                <p class="text-muted mb-0">No existing expenses</p>
+                            </div>
+                        </div>
                     {% endfor %}
-                </ul>
+                </div>
             </div>
         </div>
 
@@ -94,14 +120,27 @@
             <!-- display existing investments -->
             <div class="mt-4">
                 <h3>Existing Investments</h3>
-                <ul>
+                <div class="row">
                     {% for investment in investments %}
-                        <li>
-                            {{ investment.investment_name }} - {{ investment.investment_amount }}
-                            <a href="{% url 'delete_investment' investment.id %}"><i class="fa-solid fa-trash" style="color: #dc3545;"></i></a>
-                        </li>
+                        <div class="col-md-6 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ investment.investment_name }}</h5>
+                                    <p class="card-text text-muted">Amount: {{ investment.investment_amount }}</p>
+                                    <a href="{% url 'delete_investment' investment.id %}" class="text-danger">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="col-md-12">
+                            <div class="card text-center p-3">
+                                <p class="text-muted mb-0">No existing investments</p>
+                            </div>
+                        </div>
                     {% endfor %}
-                </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -118,30 +157,5 @@
             <h4>Total Investments: {{ total_investments }}</h4>
         </div>
     </div>
-</div>
-<!-- <script type="text/javascript">
-   document.addEventListener('DOMContentLoaded', function() {
-    // Retrieve custom income from localStorage
-    let customIncome = localStorage.getItem('customIncome');
-    
-    // Get the income dropdown element
-    let incomeDropdown = document.getElementById('id_income_name');
-    
-    // Check if the custom income is not null and not already present in the dropdown
-    if (customIncome && !Array.from(incomeDropdown.options).some(option => option.value === customIncome)) {
-        // Create an option for the custom income
-        let customIncomeOption = new Option(customIncome, customIncome);
 
-        // Add the custom income option to the top of the dropdown
-        incomeDropdown.insertBefore(customIncomeOption, incomeDropdown.firstChild);
-    }
-});
-
-// Save the custom income to localStorage when input changes
-document.getElementById('customIncome').addEventListener('input', function() {
-    let customIncome = this.value;
-    localStorage.setItem('customIncome', customIncome);
-});
-
-</script> -->
-{% endblock content %}
+{% endblock %}

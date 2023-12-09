@@ -40,6 +40,7 @@ class ExpenseForm(forms.ModelForm):
         # Additional field for custom income
         self.fields['custom_expense'] = forms.CharField(
             label='Custom Expense', required=False)  # Make it optional
+        
     class Meta:
         model = Expense
         fields = ['expense_name', 'expense_amount', 'future_expense_date']

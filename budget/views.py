@@ -7,23 +7,6 @@ from .forms import IncomeForm, ExpenseForm, InvestmentForm
 from .models import Income, Expense, Investment, IncomeSource, ExpenseSource, InvestmentSource
 
 
-
-
-        # default_sources = [
-        #     ('salary', 'Salary'), 
-        #     ('freelance-income', 'Freelance Income'),
-        #     ('investment-returns', 'Investment Returns'),
-        #     ('rental-income', 'Rental Income'),
-        #     ('business-profits', 'Business Profits'),
-        #     ('royalties', 'Royalties'),
-        #     ('social-security-benefits', 'Social Security Benefits'),
-        #     ('pension', 'Pension'),
-        #     ('grands-and-scholarships','Grants and Scholarships'),
-        #     ('alimony-or-child-support','Alimony or Child Support'),
-        #     ('other', 'Other')
-        # ]
-
-
 class HomePageView(TemplateView):
     template_name = 'home.html'
     
@@ -120,10 +103,10 @@ def budget_view(request):
                 
                 selected_expense_source_id = request.POST.get('expense_name')
                 if selected_expense_source_id == 'custom':
-                    # Handle custom income entry creation
+                    # Handle custom expense entry creation
                     custom_expense_name = request.POST.get('custom_expense')
                     if custom_expense_name:
-                        # Create a new IncomeSource entry for the custom income
+                        # Create a new ExpenseSource entry for the custom expense
                         new_expense_source = ExpenseSource.objects.create(user=user, name=custom_expense_name)
                         expense.expense_name = new_expense_source
                 else:
@@ -133,7 +116,7 @@ def budget_view(request):
                 expense.save()
                 return redirect('budget')
         elif 'investment_submit' in request.POST:
-            investment_form = ExpenseForm(request.POST, user=user)
+            investment_form = InvestmentForm(request.POST, user=user)
             if investment_form.is_valid():
                 investment = investment_form.save(commit=False)
                 investment.user = request.user
@@ -145,7 +128,7 @@ def budget_view(request):
                     if custom_investment_name:
                         # Create a new InvestmentSource entry for the custom investment
                         new_investment_source = InvestmentSource.objects.create(user=user, name=custom_investment_name)
-                        expense.investment_name = new_investment_source
+                        investment.investment_name = new_investment_source
                 else:
                     selected_investment_source = get_object_or_404(InvestmentSource, id=selected_investment_source_id)
                     investment.investment_name = selected_investment_source
@@ -179,6 +162,7 @@ def budget_view(request):
         'total_income': total_income,
         'total_expenses': total_expenses,
         'total_investments': total_investments,
+        
         'remaining_balance': remaining_balance,
     })
 

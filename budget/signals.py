@@ -21,7 +21,6 @@ default_sources = [
     ('pension', 'Pension'),
     ('grands-and-scholarships','Grants and Scholarships'),
     ('alimony-or-child-support','Alimony or Child Support'),
-    ('other', 'Other')
 ]
 
 default_expenses = [
@@ -37,7 +36,6 @@ default_expenses = [
     ('savings-and-investments', 'Savings and Investments'),
     ('childcare', 'Childcare'),
     ('insurance', 'Insurance'),
-    ('other', 'Other')
 ]
 
 default_investments = [
@@ -52,7 +50,6 @@ default_investments = [
     ('savings-accounts', 'Savings Accounts'),
     ('cryptocurrencies', 'Cryptocurrencies'),
     ('annuities', 'Annuities'),
-    ('other', 'Other'),
 ]
 
 # Signal receiver function to create default IncomeSource, ExpenseSource, InvestmentSource instances
