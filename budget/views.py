@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-
+from django.http import JsonResponse
 
 from .forms import IncomeForm, ExpenseForm, InvestmentForm
 from .models import Income, Expense, Investment, IncomeSource, ExpenseSource, InvestmentSource
@@ -10,58 +10,6 @@ from .models import Income, Expense, Investment, IncomeSource, ExpenseSource, In
 class HomePageView(TemplateView):
     template_name = 'home.html'
     
-
-# @login_required
-# def budget_view(request):
-#     incomes = Income.objects.filter(user=request.user)
-#     expenses = Expense.objects.filter(user=request.user)
-#     investments = Investment.objects.filter(user=request.user)
-    
-#     total_income = sum(income.income_amount for income in incomes)
-#     total_expenses = sum(expense.expense_amount for expense in expenses)
-#     total_investments = sum(investment.investment_amount for investment in investments)
-#     remaining_balance = total_income - total_expenses - total_investments
-    
-#     if request.method == 'POST':
-#         if 'income_submit' in request.POST:
-#             form = IncomeForm(request.POST)
-#             if form.is_valid():
-#                 income = form.save(commit=False)
-#                 income.user = request.user
-#                 income.save()
-#                 return redirect('budget')
-#         elif 'expense_submit' in request.POST:
-#             form = ExpenseForm(request.POST)
-#             if form.is_valid():
-#                 expense = form.save(commit=False)
-#                 expense.user = request.user
-#                 expense.save()
-#                 return redirect('budget')
-#         elif 'investment_submit' in request.POST:
-#             form = InvestmentForm(request.POST)
-#             if form.is_valid():
-#                 investment = form.save(commit=False)
-#                 investment.user = request.user
-#                 investment.save()
-#                 return redirect('budget')
-#     else:
-#         income_form = IncomeForm()
-#         expense_form = ExpenseForm()
-#         investment_form = InvestmentForm()
-
-#     return render(request, 'budget/budget.html', {
-#         'incomes': incomes,
-#         'expenses': expenses,
-#         'investments': investments,
-#         'income_form': income_form,
-#         'expense_form': expense_form,
-#         'investment_form': investment_form,
-#         'total_income': total_income,
-#         'total_expenses': total_expenses,
-#         'total_investments': total_investments,
-#         'remaining_balance': remaining_balance,
-#     })
-
 
 @login_required
 def budget_view(request):
@@ -187,3 +135,23 @@ def delete_investment(request, investment_id):
     if investment.user == request.user:
         investment.delete()
     return redirect('budget')
+
+
+
+def get_updated_totals(request):
+    user = request.user
+    incomes = Income.objects.filter(user=user)
+    expenses = Expense.objects.filter(user=user)
+    investments = Investment.objects.filter(user=user)
+    
+    total_income = sum(income.income_amount for income in incomes)
+    total_expenses = sum(expense.expense_amount for expense in expenses)
+    total_investments = sum(investment.investment_amount for investment in investments)
+    remaining_balance = total_income - total_expenses - total_investments
+    
+    return JsonResponse({
+        'total_income': total_income,
+        'total_expenses': total_expenses,
+        'total_investments': total_investments,
+        'remaining_balance': remaining_balance,
+    })

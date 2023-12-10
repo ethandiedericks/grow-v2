@@ -1,10 +1,14 @@
 from django import forms
-
 from .models import Expense, Income, Investment, IncomeSource, ExpenseSource, InvestmentSource
 
-
 class IncomeForm(forms.ModelForm):
+    """
+    Form for handling income data.
+    """
     def __init__(self, *args, **kwargs):
+        """
+        Initializes the IncomeForm instance.
+        """
         user = kwargs.pop('user', None)
         super(IncomeForm, self).__init__(*args, **kwargs)
         
@@ -27,7 +31,13 @@ class IncomeForm(forms.ModelForm):
         }
 
 class ExpenseForm(forms.ModelForm):
+    """
+    Form for handling expense data.
+    """
     def __init__(self, *args, **kwargs):
+        """
+        Initializes the ExpenseForm instance.
+        """
         user = kwargs.pop('user', None)
         super(ExpenseForm, self).__init__(*args, **kwargs)
         
@@ -37,7 +47,7 @@ class ExpenseForm(forms.ModelForm):
         
         self.fields['expense_name'] = forms.ChoiceField(choices=choices)
         
-        # Additional field for custom income
+        # Additional field for custom expense
         self.fields['custom_expense'] = forms.CharField(
             label='Custom Expense', required=False)  # Make it optional
         
@@ -50,7 +60,13 @@ class ExpenseForm(forms.ModelForm):
         }
 
 class InvestmentForm(forms.ModelForm):
+    """
+    Form for handling investment data.
+    """
     def __init__(self, *args, **kwargs):
+        """
+        Initializes the InvestmentForm instance.
+        """
         user = kwargs.pop('user', None)
         super(InvestmentForm, self).__init__(*args, **kwargs)
         
@@ -60,7 +76,7 @@ class InvestmentForm(forms.ModelForm):
         
         self.fields['investment_name'] = forms.ChoiceField(choices=choices)
         
-        # Additional field for custom income
+        # Additional field for custom investment
         self.fields['custom_investment'] = forms.CharField(
             label='Custom Investment', required=False)  # Make it optional
     class Meta:

@@ -42,3 +42,8 @@
     box-shadow: none; /* Remove the shadow when not focused */
 }
 
+/* Add a hover effect */
+.delete-item:hover {
+    cursor: pointer;
+    background-color: lightcoral;
+}

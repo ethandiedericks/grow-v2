@@ -55,12 +55,18 @@ default_investments = [
 # Signal receiver function to create default IncomeSource, ExpenseSource, InvestmentSource instances
 @receiver(post_save, sender=User)
 def create_default_income_sources(sender, instance, created, **kwargs):
+    """
+    Signal receiver function to create default IncomeSource instances for a new user.
+    """
     if created:
         for source in default_sources:
             IncomeSource.objects.create(user=instance, name=source[1])
     
 @receiver(post_save, sender=User)
 def create_default_expenses(sender, instance, created, **kwargs):
+    """
+    Signal receiver function to create default ExpenseSource instances for a new user.
+    """
     if created:
         for expense in default_expenses:
             ExpenseSource.objects.create(user=instance, name=expense[1])
@@ -68,6 +74,9 @@ def create_default_expenses(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=User)
 def create_default_investments(sender, instance, created, **kwargs):
+    """
+    Signal receiver function to create default InvestmentSource instances for a new user.
+    """
     if created:
         for investment in default_investments:
             InvestmentSource.objects.create(user=instance, name=investment[1])

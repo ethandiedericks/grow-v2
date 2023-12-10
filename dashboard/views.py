@@ -7,6 +7,12 @@ from budget.models import Income, Expense, Investment, IncomeSource, ExpenseSour
 
 @login_required
 def dashboard(request):
+    """
+    View function for rendering the dashboard page.
+
+    Retrieves user-specific financial data including incomes, expenses, and investments,
+    formats the data for visualization, and renders it on the dashboard template.
+    """
     incomes = Income.objects.filter(user=request.user)
     expenses = Expense.objects.filter(user=request.user)
     investments = Investment.objects.filter(user=request.user)
@@ -50,6 +56,12 @@ def dashboard(request):
 
 @login_required
 def bar_line_chart_data(request):
+    """
+    View function for fetching data to render a bar and line chart.
+
+    Retrieves user-specific total income, expenses, and investments to generate
+    data for a bar and line chart to display financial summaries.
+    """
     incomes = Income.objects.filter(user=request.user)
     expenses = Expense.objects.filter(user=request.user)
     investments = Investment.objects.filter(user=request.user)
@@ -60,7 +72,7 @@ def bar_line_chart_data(request):
     
     labels = ['Total Income', 'Total Expense', 'Total Investment']
     values_bar_chart = [total_income, total_expense, total_investment]
-    values_line_chart = [total_income, total_expense, total_investment]  # Using negative value for expense
+    values_line_chart = [total_income, total_expense, total_investment]  
     
     return JsonResponse({
         'labels': labels,
@@ -70,6 +82,12 @@ def bar_line_chart_data(request):
 
 @login_required
 def category_chart_data(request):
+    """
+    View function for generating category-wise financial data for charts.
+
+    Fetches user-specific financial sources (income, expense, investment) and their
+    corresponding amounts to generate data for category-wise visualization.
+    """
     income_sources = IncomeSource.objects.filter(user=request.user)
     expense_sources = ExpenseSource.objects.filter(user=request.user)
     investment_sources = InvestmentSource.objects.filter(user=request.user)
@@ -105,6 +123,12 @@ def category_chart_data(request):
 
 @login_required
 def income_sources(request):
+    """
+    View function for fetching income source data.
+
+    Retrieves user-specific income sources and their corresponding amounts
+    for rendering income-related charts or data visualization.
+    """
     income_sources = IncomeSource.objects.filter(user=request.user)
 
     income_data = {
@@ -113,7 +137,6 @@ def income_sources(request):
         for source in income_sources
     }
 
-    # Rearrange data structure to match JavaScript expectations
     data = {
         'labels': list(income_data.keys()),
         'values': list(income_data.values()),
@@ -122,6 +145,12 @@ def income_sources(request):
 
 @login_required
 def expense_categories(request):
+    """
+    View function for fetching expense category data.
+
+    Retrieves user-specific expense categories and their corresponding amounts
+    for rendering expense-related charts or data visualization.
+    """
     expense_sources = ExpenseSource.objects.filter(user=request.user)
 
     expense_data = {
@@ -130,7 +159,6 @@ def expense_categories(request):
         for source in expense_sources
     }
 
-    # Rearrange data structure to match JavaScript expectations
     data = {
         'labels': list(expense_data.keys()),
         'values': list(expense_data.values()),
@@ -139,6 +167,12 @@ def expense_categories(request):
 
 @login_required
 def investment_categories(request):
+    """
+    View function for fetching investment category data.
+
+    Retrieves user-specific investment categories and their corresponding amounts
+    for rendering investment-related charts or data visualization.
+    """
     investment_sources = InvestmentSource.objects.filter(user=request.user)
 
     investment_data = {
@@ -147,7 +181,6 @@ def investment_categories(request):
         for source in investment_sources
     }
 
-    # Rearrange data structure to match JavaScript expectations
     data = {
         'labels': list(investment_data.keys()),
         'values': list(investment_data.values()),
