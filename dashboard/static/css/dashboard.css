@@ -1,7 +1,7 @@
 
 /* cards */
 .custom-income-color {
-    background-color: #10a37f;
+    background-color: #28a745;
 }
 .animated-card-content {
     opacity: 0;
@@ -17,6 +17,45 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+/* Example CSS for the income, expenses, and investments cards */
+.custom-income-background {
+    background-color: #28a745; /* Green background color for income */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
+}
+
+.bg-dark {
+    background-color: #343a40; /* Dark background color for expenses */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
+}
+
+.bg-primary {
+    background-color: #007bff; /* Blue background color for investments */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
+}
+
+.text-white {
+    color: #fff; /* White text color for better visibility */
+}
+
+.animated-card-content {
+    transition: transform 0.3s ease-in-out; /* Adding a subtle animation effect */
+}
+
+/* Styling for card titles */
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Styling for card values */
+.card-value {
+    font-size: 2.5rem;
+    margin-top: 5px;
+    margin-bottom: 8px;
 }
 
 /* charts */

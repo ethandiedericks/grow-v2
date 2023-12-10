@@ -8,15 +8,15 @@
 
 {% block content %} 
 
-<div class="budget-container">
+<div class="budget-container shadow-sm">
     <div class="row p-4">
         <div class="text-center mb-4">
-            <h1>Personal Budget</h1>
+            <h1 class="display-4">Manage Your Finances</h1>
         </div>
 
         <!-- incomes sources form -->
         <div class="col-md-4 p-4">
-            <h2>Income Sources</h2>
+            <h2 class="h4">Income Sources</h2>
             
             <form method="post" id="incomeForm">
                 {% csrf_token %}
@@ -33,14 +33,14 @@
             </form>
             <!-- display existing incomes -->
             <div class="mt-4">
-                <h3>Existing Incomes</h3>
+                <h3 class="h5">Existing Incomes</h3>
                 <div class="row">
                     {% for income in incomes %}
                         <div class="col-md-6 mb-3">
                             <div class="card delete-item" data-item-id="{{ income.id }}" onclick="deleteItem('{{ income.id }}', 'income')">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ income.income_name }}</h5>
-                                    <p class="card-text text-muted">Amount: {{ income.income_amount }}</p>
+                                    <h5 class="h5">{{ income.income_name }}</h5>
+                                    <p class="text-muted h6">Amount: {{ income.income_amount }}</p>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
 
         <!-- expense form -->
         <div class="col-md-4 p-4">
-            <h2>Expenses</h2>
+            <h2 class="h4">Expenses</h2>
             <form method="post" id="expenseForm" class="expense-form">
                 {% csrf_token %}
                 <div class="form-group">
@@ -73,14 +73,14 @@
             </form>
             <!-- display existing expenses -->
             <div class="mt-4">
-                <h3>Existing Expenses</h3>
+                <h3 class="h5">Existing Expenses</h3>
                 <div class="row">
                     {% for expense in expenses %}
                         <div class="col-md-6 mb-3">
                             <div class="card delete-item" data-item-id="{{ expense.id }}" onclick="deleteItem('{{ expense.id }}', 'expense')">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ expense.expense_name }}</h5>
-                                    <p class="card-text text-muted">Amount: {{ expense.expense_amount }}</p>
+                                    <h5 class="h5">{{ expense.expense_name }}</h5>
+                                    <p class="h6 text-muted">Amount: {{ expense.expense_amount }}</p>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
 
         <!-- investment form -->
         <div class="col-md-4 p-4">
-            <h2>Investments</h2>
+            <h2 class="h4">Investments</h2>
             <form method="post" id="investmentForm" class="investment-form">
                 {% csrf_token %}
                 <div class="form-group">
@@ -113,14 +113,14 @@
             </form>
             <!-- display existing investments -->
             <div class="mt-4">
-                <h3>Existing Investments</h3>
+                <h3 class="h5">Existing Investments</h3>
                 <div class="row">
                     {% for investment in investments %}
                         <div class="col-md-6 mb-3">
                             <div class="card delete-item" data-item-id="{{ investment.id }}" onclick="deleteItem('{{ investment.id }}', 'investment')">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ investment.investment_name }}</h5>
-                                    <p class="card-text text-muted">Amount: {{ investment.investment_amount }}</p>
+                                    <h5 class="h5">{{ investment.investment_name }}</h5>
+                                    <p class="h6 text-muted">Amount: {{ investment.investment_amount }}</p>
                                 </div>
                             </div>
                         </div>
@@ -138,14 +138,14 @@
     
     <div class="row">
         <div class="col-md-4 p-4" id="totalIncome">
-            <h4>Total Income: {{ total_income }}</h4>
+            <h4 class="h6">Total Income: {{ total_income }}</h4>
         </div>
         <div class="col-md-4 p-4" id="totalExpenses">
-            <h4>Total Expenses: {{ total_expenses }}</h4>
-            <h4>Remaining Balance: {{ remaining_balance }}</h4>
+            <h4 class="h6">Total Expenses: {{ total_expenses }}</h4>
+            <h4 class="h6">Remaining Balance: {{ remaining_balance }}</h4>
         </div>
         <div class="col-md-4 p-4" id="totalInvestments">
-            <h4>Total Investments: {{ total_investments }}</h4>
+            <h4 class="h6">Total Investments: {{ total_investments }}</h4>
         </div>
     </div>
     <script>
@@ -169,13 +169,13 @@
                             .then(response => response.json())
                             .then(data => {
                                 // Update total income
-                                document.getElementById('totalIncome').innerHTML = `<h4>Total Income: ${data.total_income}</h4>`;
+                                document.getElementById('totalIncome').innerHTML = `<h4 class="h6">Total Income: ${data.total_income}</h4>`;
     
                                 // Update total expenses and remaining balance
-                                document.getElementById('totalExpenses').innerHTML = `<h4>Total Expenses: ${data.total_expenses}</h4><h4>Remaining Balance: ${data.remaining_balance}</h4>`;
+                                document.getElementById('totalExpenses').innerHTML = `<h4 class="h6">Total Expenses: ${data.total_expenses}</h4><h4 class="h6">Remaining Balance: ${data.remaining_balance}</h4>`;
     
                                 // Update total investments
-                                document.getElementById('totalInvestments').innerHTML = `<h4>Total Investments: ${data.total_investments}</h4>`;
+                                document.getElementById('totalInvestments').innerHTML = `<h4 class="h6">Total Investments: ${data.total_investments}</h4>`;
                             })
                             .catch(error => {
                                 console.error('Error fetching updated totals:', error);

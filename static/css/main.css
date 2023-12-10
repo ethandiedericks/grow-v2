@@ -1,7 +1,9 @@
 @font-face {
-    font-family: 'Lato';
-    src: url('/static/fonts/Lato-Regular.ttf') format('truetype');
+    font-family: 'Roboto';
+    src: url('/static/fonts/Roboto-Regular.ttf') format('truetype');
+    /* Add additional font weights and styles if needed */
 }
+
 
 /* prevent dropdown from going off-screen */
 @media (min-width: 992px) {
@@ -11,12 +13,18 @@
     }
   }
 
-body {
-    font-family: 'Lato', sans-serif;
+  body {
+    font-family: 'Roboto', sans-serif;
+    /* Other styles for body */
+}
+
+h1, h2, h3 {
+    font-family: 'Roboto', sans-serif;
+    /* Other styles for headings */
 }
 
 input:focus {
-    border-color: #10a37f !important; /* Change to your preferred shade of green */
+    border-color: #28a745 !important; /* Change to your preferred shade of green */
     box-shadow: 0 0 0 0.2rem rgba(0, 166, 126, 0.25) !important; /* Optional: Add a slight shadow effect */
 }
 

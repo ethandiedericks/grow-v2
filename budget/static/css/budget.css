@@ -1,5 +1,5 @@
 .budget-container {
-    background-color: #f2f2f2; /* Light gray color */
+    background-color: #f8f9fa; /* Light gray color */
     border-radius: 10px; /* Rounded corners */
     padding: 20px; /* Add some padding for better spacing */
     margin: 20px auto; /* Center the container */
@@ -9,16 +9,16 @@
 
 .btn-custom {
     color: #fff;
-    background-color: #10a37f;
-    border-color: #10a37f;
+    background-color: #28a745;
+    border-color: #28a745;
 }
 
 /* This will change the hover and active states of Bootstrap buttons */
 .btn-custom:hover,
 .btn-custom:focus,
 .btn-custom:active {
-    background-color: #0e9171; /* Darker shade for hover and active states */
-    border-color: #0e9171;
+    background-color: #218838; /* Darker shade for hover and active states */
+    border-color: #28a745;
     color: #fff;
 }
 
@@ -46,4 +46,13 @@
 .delete-item:hover {
     cursor: pointer;
     background-color: lightcoral;
+}
+.budget-container h1,
+.budget-container h2,
+.budget-container h3,
+.budget-container h4,
+.budget-container h5 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: #333;
 }

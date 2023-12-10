@@ -11,25 +11,25 @@
 <div class="container mt-4">
     <!-- income and expense total cards -->
             <div class="row">
-                <!-- total income card -->
+               <!-- Updated Income Card -->
                 <div class="col-md-4 mb-4">
-                    <div class="card custom-income-color text-white animated-card-content">
+                    <div class="card custom-income-background text-white animated-card-content">
                         <div class="card-body d-flex justify-content-center align-items-center">
-                            <i class="fa-solid fa-hand-holding-dollar fa-3x me-3"></i>
+                            <i class="fa-solid fa-hand-holding-usd fa-3x me-3"></i>
                             <div class="mx-3">
                                 <h5 class="card-title mb-0">Total Income</h5>
-                                <h3 class="card-value"><strong> {{ total_income }}</strong></h3>
+                                <h3 class="card-value"><strong>{{ total_income }}</strong></h3>
                                 <p class="card-text">Breakdown: Salary, Investments, Other</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- total expense card -->
+                <!-- Updated Expenses Card -->
                 <div class="col-md-4 mb-4">
-                    <div class="card bg-danger text-white animated-card-content">
+                    <div class="card bg-dark text-white animated-card-content">
                         <div class="card-body d-flex justify-content-center align-items-center">
-                            <i class="fa-solid fa-wallet fa-3x me-3"></i>
+                            <i class="fa-solid fa-credit-card fa-3x me-3"></i>
                             <div class="mx-3">
                                 <h5 class="card-title mb-0">Total Expenses</h5>
                                 <h3 class="card-value"><strong>{{ total_expense }}</strong></h3>
@@ -38,13 +38,12 @@
                         </div>
                     </div>
                 </div>
-                
 
-                <!-- total investment card -->
+                <!-- Updated Investments Card -->
                 <div class="col-md-4 mb-4">
                     <div class="card bg-primary text-white animated-card-content">
                         <div class="card-body d-flex justify-content-center align-items-center">
-                            <i class="fa-solid fa-wallet fa-3x me-3"></i>
+                            <i class="fa-solid fa-chart-pie fa-3x me-3"></i>
                             <div class="mx-3">
                                 <h5 class="card-title mb-0">Total Investments</h5>
                                 <h3 class="card-value"><strong>{{ total_investment }}</strong></h3>
@@ -53,11 +52,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
+
 
             <div class="row mt-4">
                 <!-- Chart selection dropdown -->
                 <div class="col-md-3 mb-4">
+                    <h4 class="h6">Select Chart Type:</h4>
                     <select id="chartSelection" class="form-select">
                         <option value="bar">Bar Chart</option>
                         <option value="line">Line Chart</option>
