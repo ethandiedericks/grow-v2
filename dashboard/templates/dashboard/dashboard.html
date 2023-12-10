@@ -10,157 +10,226 @@
 
 <div class="container mt-4">
     <!-- income and expense total cards -->
-    <div class="row">
-        <!-- total income card -->
-        <div class="col-md-4 mb-4">
-            <div class="card custom-income-color text-white animated-card-content">
-                <div class="card-body d-flex justify-content-center align-items-center">
-                    <i class="fa-solid fa-hand-holding-dollar fa-3x me-3"></i>
-                    <div class="mx-3">
-                        <h5 class="card-title mb-0">Total Income</h5>
-                        <h3 class="card-value"><strong> {{ total_income }}</strong></h3>
-                        <p class="card-text">Breakdown: Salary, Investments, Other</p>
+            <div class="row">
+                <!-- total income card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card custom-income-color text-white animated-card-content">
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-hand-holding-dollar fa-3x me-3"></i>
+                            <div class="mx-3">
+                                <h5 class="card-title mb-0">Total Income</h5>
+                                <h3 class="card-value"><strong> {{ total_income }}</strong></h3>
+                                <p class="card-text">Breakdown: Salary, Investments, Other</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- total expense card -->
-        <div class="col-md-4 mb-4">
-            <div class="card bg-danger text-white animated-card-content">
-                <div class="card-body d-flex justify-content-center align-items-center">
-                    <i class="fa-solid fa-wallet fa-3x me-3"></i>
-                    <div class="mx-3">
-                        <h5 class="card-title mb-0">Total Expenses</h5>
-                        <h3 class="card-value"><strong>{{ total_expense }}</strong></h3>
-                        <p class="card-text">Breakdown: Rent, Utilities, Groceries</p>
+                <!-- total expense card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-danger text-white animated-card-content">
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-wallet fa-3x me-3"></i>
+                            <div class="mx-3">
+                                <h5 class="card-title mb-0">Total Expenses</h5>
+                                <h3 class="card-value"><strong>{{ total_expense }}</strong></h3>
+                                <p class="card-text">Breakdown: Rent, Utilities, Groceries</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        
+                
 
-        <!-- total investment card -->
-        <div class="col-md-4 mb-4">
-            <div class="card bg-primary text-white animated-card-content">
-                <div class="card-body d-flex justify-content-center align-items-center">
-                    <i class="fa-solid fa-wallet fa-3x me-3"></i>
-                    <div class="mx-3">
-                        <h5 class="card-title mb-0">Total Investments</h5>
-                        <h3 class="card-value"><strong>{{ total_investment }}</strong></h3>
-                        <p class="card-text">Breakdown: Stocks, Bonds, Crypto</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row mt-4">
-        <!-- Chart selection dropdown -->
-        <div class="col-md-3">
-            <select id="chartSelection" class="form-select">
-                <option value="bar">Bar Chart</option>
-                <option value="line">Line Chart</option>
-                <option value="pie">Pie Chart</option>
-                <option value="doughnut">Doughnut Chart</option>
-            </select>
-        </div>
-
-        <!-- Bar chart for individual expenses -->
-        <div class="col-md-9" id="chartSection">
-            <div class="card" id="barChartSection" style="display: none;">
-                <div class="card-body">
-                    <h2 class="card-title text-center">Income Sources vs Expenses vs Investments</h2>
-                    <div class="bar-chart-container">
-                        <canvas id="barChart"></canvas>
+                <!-- total investment card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-primary text-white animated-card-content">
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-wallet fa-3x me-3"></i>
+                            <div class="mx-3">
+                                <h5 class="card-title mb-0">Total Investments</h5>
+                                <h3 class="card-value"><strong>{{ total_investment }}</strong></h3>
+                                <p class="card-text">Breakdown: Stocks, Bonds, Crypto</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Line chart -->
-            <div class="card" id="lineChartSection" style="display: none;">
-                <div class="card-body">
-                    <h2 class="card-title text-center">Income Sources vs Expenses vs Investments</h2>
-                    <div class="line-chart-container">
-                        <canvas id="lineChart"></canvas>
+            <div class="row mt-4">
+                <!-- Chart selection dropdown -->
+                <div class="col-md-3">
+                    <select id="chartSelection" class="form-select">
+                        <option value="bar">Bar Chart</option>
+                        <option value="line">Line Chart</option>
+                        <option value="pie">Pie Chart</option>
+                        <option value="doughnut">Doughnut Chart</option>
+                    </select>
+                </div>
+
+                <!-- Bar chart for individual expenses -->
+                <div class="col-md-9" id="barChartSection">
+                    <!-- Row for Income Sources Bar Chart -->
+                    <div class="row mb-4">
+                        <div class="card col-md-12">
+                            <div class="card-body">
+                                <h2 class="card-title text-center">Income Sources</h2>
+                                <div class="bar-chart-container">
+                                    <!-- Canvas for Income Sources Bar Chart -->
+                                    <canvas id="incomeSourcesBarChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row for Expense Categories Bar Chart -->
+                    <div class="row mb-4">
+                        <div class="card col-md-12">
+                            <div class="card-body">
+                                <h2 class="card-title text-center">Expense Categories</h2>
+                                <div class="bar-chart-container">
+                                    <!-- Canvas for Expense Categories Bar Chart -->
+                                    <canvas id="expenseCategoriesBarChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row for Investment Categories Bar Chart -->
+                    <div class="row">
+                        <div class="card col-md-12">
+                            <div class="card-body">
+                                <h2 class="card-title text-center">Investment Categories</h2>
+                                <div class="bar-chart-container">
+                                    <!-- Canvas for Investment Categories Bar Chart -->
+                                    <canvas id="investmentCategoriesBarChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!-- Line chart for individual categories -->
+            <div class="col-md-9" id="lineChartSection" style="display: none;">
+                <!-- Row for Income Sources Line Chart -->
+                <div class="row mb-4">
+                    <div class="card col-md-12">
+                        <div class="card-body">
+                            <h2 class="card-title text-center">Income Sources</h2>
+                            <div class="line-chart-container">
+                                <!-- Canvas for Income Sources Line Chart -->
+                                <canvas id="incomeSourcesLineChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row for Expense Categories Line Chart -->
+                <div class="row mb-4">
+                    <div class="card col-md-12">
+                        <div class="card-body">
+                            <h2 class="card-title text-center">Expense Categories</h2>
+                            <div class="line-chart-container">
+                                <!-- Canvas for Expense Categories Line Chart -->
+                                <canvas id="expenseCategoriesLineChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row for Investment Categories Line Chart -->
+                <div class="row">
+                    <div class="card col-md-12">
+                        <div class="card-body">
+                            <h2 class="card-title text-center">Investment Categories</h2>
+                            <div class="line-chart-container">
+                                <!-- Canvas for Investment Categories Line Chart -->
+                                <canvas id="investmentCategoriesLineChart"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Pie charts section -->
-            <div class="row" id="pieChartsRow" style="display: none; ">
-                <div class="col-md-4">
-                    <!-- Pie chart for Expenses -->
-                    <div class="card" id="expensesChartSection">
-                        <div class="card-body">
-                            <h2 class="card-title text-center">Expenses</h2>
-                            <div class="pie-chart-container">
-                                <canvas id="expensesPieChart"></canvas>
+            <div class="col-md-9" id="pieChartsRow" style="display: none; ">
+                <div class="row">
+                    <div class="col-md-4">
+                        <!-- Pie chart for Expenses -->
+                        <div class="card" id="expensesChartSection">
+                            <div class="card-body">
+                                <h2 class="card-title text-center">Expenses</h2>
+                                <div class="pie-chart-container">
+                                    <canvas id="expensesPieChart"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <!-- Pie chart for Income Sources -->
-                    <div class="card" id="incomeSourcesChartSection">
-                        <div class="card-body">
-                            <h2 class="card-title text-center">Income Sources</h2>
-                            <div class="pie-chart-container">
-                                <canvas id="incomeSourcesPieChart"></canvas>
+
+                    <div class="col-md-4">
+                        <!-- Pie chart for Income Sources -->
+                        <div class="card" id="incomeSourcesChartSection">
+                            <div class="card-body">
+                                <h2 class="card-title text-center">Income Sources</h2>
+                                <div class="pie-chart-container">
+                                    <canvas id="incomeSourcesPieChart"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <!-- Pie chart for Investment -->
-                    <div class="card" id="investmentChartSection">
-                        <div class="card-body">
-                            <h2 class="card-title text-center">Investment</h2>
-                            <div class="pie-chart-container">
-                                <canvas id="investmentPieChart"></canvas>
+
+                    <div class="col-md-4">
+                        <!-- Pie chart for Investment -->
+                        <div class="card" id="investmentChartSection">
+                            <div class="card-body">
+                                <h2 class="card-title text-center">Investments</h2>
+                                <div class="pie-chart-container">
+                                    <canvas id="investmentPieChart"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
+           
                 </div>
             </div>
 
             <!-- Doughnut charts section -->
-            <div class="row" id="doughnutChartsRow" style="display: none;">
-                <div class="col-md-4">
-                    <!-- Doughnut chart for Expenses -->
-                    <div class="card" id="expensesDoughnutChartSection">
-                        <!-- ... Doughnut chart code for Expenses ... -->
-                        <div class="card-body">
-                            <h2 class="card-title text-center">Expenses</h2>
-                            <div class="doughnut-chart-container">
-                                <canvas id="expensesDoughnutChart"></canvas>
+            <div class="col-md-9" id="doughnutChartsRow" style="display: none;">
+                <div class="row">
+                    <div class="col-md-4">
+                        <!-- Doughnut chart for Expenses -->
+                        <div class="card" id="expensesDoughnutChartSection">
+                            <!-- ... Doughnut chart code for Expenses ... -->
+                            <div class="card-body">
+                                <h2 class="card-title text-center">Expenses</h2>
+                                <div class="doughnut-chart-container">
+                                    <canvas id="expensesDoughnutChart"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <!-- Doughnut chart for Income Sources -->
-                    <div class="card" id="incomeSourcesDoughnutChartSection">
-                        <!-- ... Doughnut chart code for Income Sources ... -->
-                        <div class="card-body">
-                            <h2 class="card-title text-center">Income Sources</h2>
-                            <div class="doughnut-chart-container">
-                                <canvas id="incomeSourcesDoughnutChart"></canvas>
+                    <div class="col-md-4">
+                        <!-- Doughnut chart for Income Sources -->
+                        <div class="card" id="incomeSourcesDoughnutChartSection">
+                            <!-- ... Doughnut chart code for Income Sources ... -->
+                            <div class="card-body">
+                                <h2 class="card-title text-center">Income Sources</h2>
+                                <div class="doughnut-chart-container">
+                                    <canvas id="incomeSourcesDoughnutChart"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <!-- Doughnut chart for Investment -->
-                    <div class="card" id="investmentDoughnutChartSection">
-                        <!-- ... Doughnut chart code for Investment ... -->
-                        <div class="card-body">
-                            <h2 class="card-title text-center">Investments</h2>
-                            <div class="doughnut-chart-container">
-                                <canvas id="investmentsDoughnutChart"></canvas>
+                    <div class="col-md-4">
+                        <!-- Doughnut chart for Investment -->
+                        <div class="card" id="investmentDoughnutChartSection">
+                            <!-- ... Doughnut chart code for Investment ... -->
+                            <div class="card-body">
+                                <h2 class="card-title text-center">Investments</h2>
+                                <div class="doughnut-chart-container">
+                                    <canvas id="investmentsDoughnutChart"></canvas>
+                                </div>
                             </div>
+                            
                         </div>
-                        
                     </div>
                 </div>
             </div>

@@ -102,3 +102,54 @@ def category_chart_data(request):
         'investment_values': list(investment_data.values()),
     })
 
+
+@login_required
+def income_sources(request):
+    income_sources = IncomeSource.objects.filter(user=request.user)
+
+    income_data = {
+        source.name: Income.objects.filter(user=request.user, income_name=source.name)
+                     .aggregate(total=Sum('income_amount'))['total'] or 0
+        for source in income_sources
+    }
+
+    # Rearrange data structure to match JavaScript expectations
+    data = {
+        'labels': list(income_data.keys()),
+        'values': list(income_data.values()),
+    }
+    return JsonResponse(data)
+
+@login_required
+def expense_categories(request):
+    expense_sources = ExpenseSource.objects.filter(user=request.user)
+
+    expense_data = {
+        source.name: Expense.objects.filter(user=request.user, expense_name=source.name)
+                     .aggregate(total=Sum('expense_amount'))['total'] or 0
+        for source in expense_sources
+    }
+
+    # Rearrange data structure to match JavaScript expectations
+    data = {
+        'labels': list(expense_data.keys()),
+        'values': list(expense_data.values()),
+    }
+    return JsonResponse(data)
+
+@login_required
+def investment_categories(request):
+    investment_sources = InvestmentSource.objects.filter(user=request.user)
+
+    investment_data = {
+        source.name: Investment.objects.filter(user=request.user, investment_name=source.name)
+                     .aggregate(total=Sum('investment_amount'))['total'] or 0
+        for source in investment_sources
+    }
+
+    # Rearrange data structure to match JavaScript expectations
+    data = {
+        'labels': list(investment_data.keys()),
+        'values': list(investment_data.values()),
+    }
+    return JsonResponse(data)
