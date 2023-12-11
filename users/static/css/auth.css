@@ -131,7 +131,7 @@
     transition: all 0.3s ease;
 }
 .btn-custom-signup:hover {
-    background-color: #218838; /* You can adjust the color if needed */
+    background-color: #28a745; /* You can adjust the color if needed */
     color: white;
 }
 .btn-back {

@@ -7,22 +7,21 @@
 
 {% block content %}
 
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <div class="welcome-section">
-                <img src="{% static 'img/grow2.png' %}" alt="Grow Image" class="img-fluid mb-4">
-                <h1 class="display-3">Welcome to Financial Freedom</h1>
-                {% if user.is_authenticated %}
-                    <p class="lead">Ready to take control of your finances?</p>
-                    <a href="{% url 'budget' %}" class="btn btn-custom btn-lg">Create a Budget</a>
-                {% else %}
-                    <p class="lead">Start managing your finances and planning for the future.</p>
-                    <p class="lead">Sign up or log in to get started.</p>
-                    <a href="{% url 'account_signup' %}" class="btn btn-custom btn-lg">Sign Up</a>
-                    <a href="{% url 'account_login' %}" class="btn btn-primary btn-lg">Log In</a>
-                {% endif %}
-            </div>
+<div class="row">
+    <div class="col-md-12 text-center">
+        <div class="welcome-section">
+            <img src="{% static 'img/grow2.png' %}" alt="Grow Image" class="img-fluid mb-4">
+            <h1 class="display-3">Welcome to Financial Freedom</h1>
+            {% if user.is_authenticated %}
+                <p class="lead">Ready to take control of your finances?</p>
+                <a href="{% url 'budget' %}" class="btn btn-custom btn-lg">Create a Budget</a>
+            {% else %}
+                <p class="lead">Start managing your finances and planning for the future.</p>
+                <p class="lead">Sign up or log in to get started.</p>
+                <a href="{% url 'account_signup' %}" class="btn btn-custom btn-lg">Sign Up</a>
+                <a href="{% url 'account_login' %}" class="btn btn-primary btn-lg">Log In</a>
+            {% endif %}
         </div>
     </div>
-
+</div>
 {% endblock content %}

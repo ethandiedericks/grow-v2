@@ -7,7 +7,36 @@
 {% endblock title %}
 
 {% block content %}
+<style>
+    body{
+        background-color: #f8f9fa;
+    }
+    /* Adjust the position and size of particles container */
+    #particles-js {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Places the particles behind other content */
+    }
+
+    .login-container {
+        position: relative;
+        z-index: 1; /* Ensures the card is on top of the particles */
+    }
+    .login-card {
+            background: rgba(255, 255, 255, 0.07); /* Adjust opacity to your preference */
+            backdrop-filter: blur(2px); /* Apply the blur effect */
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Adjust shadow properties */
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255, 255, 255, 0.18); /* Adjust border color and opacity */
+        }
+</style>
+
     <div class="container login-container">
+        <div id="particles-js"></div>
         <div class="card login-card shadow">
             <div class="card-body login-card-body">
                 <div class="text-center mb-4">
@@ -25,4 +54,79 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 100,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#28a745"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#28a745"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#28a745",
+                        "opacity": 0.5,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 3,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out"
+                    }
+                },
+                "interactivity": {
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "repulse"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        }
+                    },
+                    "modes": {
+                        "repulse": {
+                            "distance": 100,
+                            "duration": 0.4
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 {% endblock content %}
