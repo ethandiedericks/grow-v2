@@ -27,7 +27,12 @@
     visibility: visible;
     transform: scaleX(1);
   }
+  .navbar.hidden {
+    top: -100px; /* Adjust this value to fully hide the navbar */
+  }
 </style>
+
+
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
   <div class="container-fluid ">
@@ -69,3 +74,24 @@
     </div>
   </div>
 </nav>
+<script>
+  let lastScrollTop = 0;
+  const navbar = document.querySelector('.navbar');
+  let ticking = false;
+
+  window.addEventListener('scroll', function() {
+    lastScrollTop = window.scrollY;
+
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        if (window.scrollY > lastScrollTop) {
+          navbar.classList.add('hidden');
+        } else {
+          navbar.classList.remove('hidden');
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+</script>

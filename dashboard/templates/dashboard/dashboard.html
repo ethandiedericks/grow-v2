@@ -66,7 +66,7 @@
                     </select>
                 </div>
 
-                <!-- Bar chart for individual expenses -->
+                <!-- Bar chart for individual incomes -->
                 <div class="col-md-9" id="barChartSection">
                     <!-- Row for Income Sources Bar Chart -->
                     <div class="row mb-4">
@@ -153,6 +153,17 @@
             <!-- Pie charts section -->
             <div class="col-md-9" id="pieChartsRow" style="display: none; ">
                 <div class="row">
+                    <!-- Pie chart for Income Sources -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card" id="incomeSourcesChartSection">
+                            <div class="card-body">
+                                <h2 class="card-title text-center">Income Sources</h2>
+                                <div class="pie-chart-container">
+                                    <canvas id="incomeSourcesPieChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-4 mb-4">
                         <!-- Pie chart for Expenses -->
                         <div class="card" id="expensesChartSection">
@@ -160,18 +171,6 @@
                                 <h2 class="card-title text-center">Expenses</h2>
                                 <div class="pie-chart-container">
                                     <canvas id="expensesPieChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 mb-4">
-                        <!-- Pie chart for Income Sources -->
-                        <div class="card" id="incomeSourcesChartSection">
-                            <div class="card-body">
-                                <h2 class="card-title text-center">Income Sources</h2>
-                                <div class="pie-chart-container">
-                                    <canvas id="incomeSourcesPieChart"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -196,18 +195,6 @@
             <div class="col-md-9" id="doughnutChartsRow" style="display: none;">
                 <div class="row">
                     <div class="col-md-4 mb-4">
-                        <!-- Doughnut chart for Expenses -->
-                        <div class="card" id="expensesDoughnutChartSection">
-                            <!-- ... Doughnut chart code for Expenses ... -->
-                            <div class="card-body">
-                                <h2 class="card-title text-center">Expenses</h2>
-                                <div class="doughnut-chart-container">
-                                    <canvas id="expensesDoughnutChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
                         <!-- Doughnut chart for Income Sources -->
                         <div class="card" id="incomeSourcesDoughnutChartSection">
                             <!-- ... Doughnut chart code for Income Sources ... -->
@@ -215,6 +202,18 @@
                                 <h2 class="card-title text-center">Income Sources</h2>
                                 <div class="doughnut-chart-container">
                                     <canvas id="incomeSourcesDoughnutChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <!-- Doughnut chart for Expenses -->
+                        <div class="card" id="expensesDoughnutChartSection">
+                            <!-- ... Doughnut chart code for Expenses ... -->
+                            <div class="card-body">
+                                <h2 class="card-title text-center">Expenses</h2>
+                                <div class="doughnut-chart-container">
+                                    <canvas id="expensesDoughnutChart"></canvas>
                                 </div>
                             </div>
                         </div>
