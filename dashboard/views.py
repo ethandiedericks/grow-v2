@@ -6,9 +6,6 @@ from budget.models import (
     Income,
     Expense,
     Investment,
-    IncomeSource,
-    ExpenseSource,
-    InvestmentSource,
 )
 from django.views.generic import View
 
@@ -63,19 +60,19 @@ class DashboardView(LoginRequiredMixin, View):
 
 class BarLineChartDataView(LoginRequiredMixin, View):
     def get(self, request):
-        incomes = Income.objects.filter(user=request.user)
-        expenses = Expense.objects.filter(user=request.user)
-        investments = Investment.objects.filter(user=request.user)
-
-        total_income = incomes.aggregate(total=Sum("income_amount"))["total"] or 0
-        total_expense = expenses.aggregate(total=Sum("expense_amount"))["total"] or 0
-        total_investment = (
-            investments.aggregate(total=Sum("investment_amount"))["total"] or 0
+        totals = Income.objects.filter(user=request.user).aggregate(
+            total_income=Sum("income_amount"),
+            total_expense=Sum("expense_amount"),
+            total_investment=Sum("investment_amount"),
         )
 
         labels = ["Total Income", "Total Expense", "Total Investment"]
-        values_bar_chart = [total_income, total_expense, total_investment]
-        values_line_chart = [total_income, total_expense, total_investment]
+        values_bar_chart = [
+            totals["total_income"] or 0,
+            totals["total_expense"] or 0,
+            totals["total_investment"] or 0,
+        ]
+        values_line_chart = values_bar_chart
 
         return JsonResponse(
             {
@@ -88,98 +85,81 @@ class BarLineChartDataView(LoginRequiredMixin, View):
 
 class CategoryChartDataView(LoginRequiredMixin, View):
     def get(self, request):
-        income_sources = IncomeSource.objects.filter(user=request.user)
-        expense_sources = ExpenseSource.objects.filter(user=request.user)
-        investment_sources = InvestmentSource.objects.filter(user=request.user)
+        expense_data = (
+            Expense.objects.filter(user=request.user)
+            .values("expense_name")
+            .annotate(total=Sum("expense_amount"))
+        )
 
-        expense_data = {
-            source.name: Expense.objects.filter(
-                user=request.user, expense_name=source.name
-            ).aggregate(total=Sum("expense_amount"))["total"]
-            or 0
-            for source in expense_sources
-        }
+        income_data = (
+            Income.objects.filter(user=request.user)
+            .values("income_name")
+            .annotate(total=Sum("income_amount"))
+        )
 
-        income_data = {
-            source.name: Income.objects.filter(
-                user=request.user, income_name=source.name
-            ).aggregate(total=Sum("income_amount"))["total"]
-            or 0
-            for source in income_sources
-        }
-
-        investment_data = {
-            source.name: Investment.objects.filter(
-                user=request.user, investment_name=source.name
-            ).aggregate(total=Sum("investment_amount"))["total"]
-            or 0
-            for source in investment_sources
-        }
+        investment_data = (
+            Investment.objects.filter(user=request.user)
+            .values("investment_name")
+            .annotate(total=Sum("investment_amount"))
+        )
 
         return JsonResponse(
             {
-                "expense_labels": list(expense_data.keys()),
-                "expense_values": list(expense_data.values()),
-                "income_labels": list(income_data.keys()),
-                "income_values": list(income_data.values()),
-                "investment_labels": list(investment_data.keys()),
-                "investment_values": list(investment_data.values()),
+                "expense_labels": [data["expense_name"] for data in expense_data],
+                "expense_values": [data["total"] or 0 for data in expense_data],
+                "income_labels": [data["income_name"] for data in income_data],
+                "income_values": [data["total"] or 0 for data in income_data],
+                "investment_labels": [
+                    data["investment_name"] for data in investment_data
+                ],
+                "investment_values": [data["total"] or 0 for data in investment_data],
             }
         )
 
 
 class IncomeSourcesView(LoginRequiredMixin, View):
     def get(self, request):
-        income_sources = IncomeSource.objects.filter(user=request.user)
+        income_data = (
+            Income.objects.filter(user=request.user)
+            .values("income_name")
+            .annotate(total=Sum("income_amount"))
+        )
 
-        income_data = {
-            source.name: Income.objects.filter(
-                user=request.user, income_name=source.name
-            ).aggregate(total=Sum("income_amount"))["total"]
-            or 0
-            for source in income_sources
-        }
-
-        data = {
-            "labels": list(income_data.keys()),
-            "values": list(income_data.values()),
-        }
-        return JsonResponse(data)
+        return JsonResponse(
+            {
+                "labels": [data["income_name"] for data in income_data],
+                "values": [data["total"] or 0 for data in income_data],
+            }
+        )
 
 
 class ExpenseCategoriesView(LoginRequiredMixin, View):
     def get(self, request):
-        expense_sources = ExpenseSource.objects.filter(user=request.user)
+        expense_data = (
+            Expense.objects.filter(user=request.user)
+            .values("expense_name")
+            .annotate(total=Sum("expense_amount"))
+        )
 
-        expense_data = {
-            source.name: Expense.objects.filter(
-                user=request.user, expense_name=source.name
-            ).aggregate(total=Sum("expense_amount"))["total"]
-            or 0
-            for source in expense_sources
-        }
-
-        data = {
-            "labels": list(expense_data.keys()),
-            "values": list(expense_data.values()),
-        }
-        return JsonResponse(data)
+        return JsonResponse(
+            {
+                "labels": [data["expense_name"] for data in expense_data],
+                "values": [data["total"] or 0 for data in expense_data],
+            }
+        )
 
 
 class InvestmentCategoriesView(LoginRequiredMixin, View):
     def get(self, request):
-        investment_sources = InvestmentSource.objects.filter(user=request.user)
+        investment_data = (
+            Investment.objects.filter(user=request.user)
+            .values("investment_name")
+            .annotate(total=Sum("investment_amount"))
+        )
 
-        investment_data = {
-            source.name: Investment.objects.filter(
-                user=request.user, investment_name=source.name
-            ).aggregate(total=Sum("investment_amount"))["total"]
-            or 0
-            for source in investment_sources
-        }
-
-        data = {
-            "labels": list(investment_data.keys()),
-            "values": list(investment_data.values()),
-        }
-        return JsonResponse(data)
+        return JsonResponse(
+            {
+                "labels": [data["investment_name"] for data in investment_data],
+                "values": [data["total"] or 0 for data in investment_data],
+            }
+        )
