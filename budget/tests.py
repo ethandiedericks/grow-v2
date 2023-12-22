@@ -1,47 +1,93 @@
-from django.test import SimpleTestCase
-from django.urls import reverse, resolve
+from django.test import TestCase
+from django.urls import reverse
+from .models import (
+    Income,
+    Expense,
+    Investment,
+)
+from django.contrib.auth import get_user_model
 
-from .views import HomePageView, budget_view
 
-# Create your tests here.
-class HomePageTests(SimpleTestCase):
-    
+class BudgetViewTests(TestCase):
     def setUp(self):
-        url = reverse('home')
-        self.response = self.client.get(url)
+        User = get_user_model()
+        self.user = User.objects.create_user(
+            username="testuser", password="testpassword"
+        )
+        self.client.login(username="testuser", password="testpassword")
 
-    def test_homepage_status_code(self):
-        self.assertEqual(self.response.status_code, 200)
-        
-    def test_homepage_template(self):
-        self.assertEqual(self.response.status_code, 200)
-        self.assertTemplateUsed('home.html')
-        
-    def test_homepage_contains_correct_html(self):
-        self.assertContains(self.response, 'Welcome to Financial Freedom')
-        
-    def test_homepage_url_resolves_homepageview(self):
-        view = resolve('/')
-        self.assertEqual(view.func.__name__, HomePageView.as_view().__name__)
-        
-class BudgetPageTests(SimpleTestCase):
-    
-    def setUp(self) -> None:
-        url = reverse('budget')
-        self.response = self.client.get(url)
-        
-    def test_budgetpage_status_code(self):
-        self.assertEqual(self.response.status_code, 200)
-        
-    def test_budgetpage_template(self): 
-        self.assertTemplateUsed(self.response, 'budget.html')
+    def test_budget_view_access(self):
+        response = self.client.get(reverse("budget"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "budget/budget.html")
 
-    def test_budgetpage_contains_correct_html(self): 
-        self.assertContains(self.response, 'Budget Page')
-        
-    def test_budgetpage_does_not_contain_incorrect_html(self): 
-        self.assertNotContains(self.response, 'Hi there! I should not be on the page.')
-        
-    def test_budgetpage_url_resolves_aboutpageview(self): 
-        view = resolve('/budget/')
-        self.assertEqual(view.func.__name__, budget_view.__name__)
+    def test_create_income_entry(self):
+        response = self.client.post(
+            reverse("budget"),
+            {"income_submit": "", "income_name": "1", "income_amount": 100},
+        )
+        self.assertEqual(
+            response.status_code, 302
+        )  # Redirects after successful creation
+        self.assertTrue(
+            Income.objects.filter(user=self.user, income_amount=100).exists()
+        )
+
+    def test_create_expense_entry(self):
+        response = self.client.post(
+            reverse("budget"),
+            {"expense_submit": "", "expense_name": "1", "expense_amount": 50},
+        )
+        self.assertEqual(
+            response.status_code, 302
+        )  # Redirects after successful creation
+        self.assertTrue(
+            Expense.objects.filter(user=self.user, expense_amount=50).exists()
+        )
+
+    def test_create_investment_entry(self):
+        response = self.client.post(
+            reverse("budget"),
+            {"investment_submit": "", "investment_name": "1", "investment_amount": 200},
+        )
+        self.assertEqual(
+            response.status_code, 302
+        )  # Redirects after successful creation
+        self.assertTrue(
+            Investment.objects.filter(user=self.user, investment_amount=200).exists()
+        )
+
+    def test_delete_income_entry(self):
+        income = Income.objects.create(
+            user=self.user, income_name="Salary", income_amount=1000
+        )
+        response = self.client.get(reverse("delete_income", args=[income.id]))
+        self.assertEqual(response.status_code, 302)  # Redirects after deleting
+        self.assertFalse(Income.objects.filter(user=self.user, id=income.id).exists())
+
+    def test_delete_expense_entry(self):
+        expense = Expense.objects.create(
+            user=self.user, expense_name="Rent", expense_amount=500
+        )
+        response = self.client.get(reverse("delete_expense", args=[expense.id]))
+        self.assertEqual(response.status_code, 302)  # Redirects after deleting
+        self.assertFalse(Expense.objects.filter(user=self.user, id=expense.id).exists())
+
+    def test_delete_investment_entry(self):
+        investment = Investment.objects.create(
+            user=self.user, investment_name="Stocks", investment_amount=1000
+        )
+        response = self.client.get(reverse("delete_investment", args=[investment.id]))
+        self.assertEqual(response.status_code, 302)  # Redirects after deleting
+        self.assertFalse(
+            Investment.objects.filter(user=self.user, id=investment.id).exists()
+        )
+
+    def test_get_updated_totals(self):
+        response = self.client.get(reverse("get_updated_totals"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_requires_login(self):
+        self.client.logout()
+        response = self.client.get(reverse("budget"))
+        self.assertEqual(response.status_code, 302)  # Redirects to login page

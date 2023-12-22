@@ -55,4 +55,49 @@ document.addEventListener('DOMContentLoaded', function() {
     } 
 });
 
+// delete cards:
+
+  
+        function deleteItem(itemId, itemType) {
+            fetch(`/delete_${itemType}/${itemId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    const cardToRemove = document.querySelector(`.card[data-item-id="${itemId}"]`);
+                    if (cardToRemove) {
+                        cardToRemove.remove();
+    
+                        // Fetch updated totals after successful deletion
+                        fetch('/get_updated_totals/')
+                            .then(response => response.json())
+                            .then(data => {
+                                // Update total income
+                                document.getElementById('totalIncome').innerHTML = `<h4 class="h6">Total Income: ${data.total_income}</h4>`;
+    
+                                // Update total expenses and remaining balance
+                                document.getElementById('totalExpenses').innerHTML = `<h4 class="h6">Total Expenses: ${data.total_expenses}</h4><h4 class="h6">Remaining Balance: ${data.remaining_balance}</h4>`;
+    
+                                // Update total investments
+                                document.getElementById('totalInvestments').innerHTML = `<h4 class="h6">Total Investments: ${data.total_investments}</h4>`;
+                            })
+                            .catch(error => {
+                                console.error('Error fetching updated totals:', error);
+                            });
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting item:', error);
+            });
+        }
+
+        function activateTab(tabId) {
+        $('#financialTabs a[href="#' + tabId + '"]').tab('show');
+    }
+
 
