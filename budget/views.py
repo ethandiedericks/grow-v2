@@ -11,6 +11,7 @@ from .models import (
     InvestmentSource,
 )
 from django.views.generic import View, TemplateView
+from django.http import HttpResponseNotAllowed
 
 
 class HomePageView(TemplateView):
@@ -156,27 +157,33 @@ class BudgetView(LoginRequiredMixin, View):
 
 
 class DeleteIncomeView(LoginRequiredMixin, View):
-    def get(self, request, income_id):
+    def delete(self, request, income_id):
         income = get_object_or_404(Income, id=income_id)
         if income.user == request.user:
             income.delete()
-        return redirect("budget")
+            return JsonResponse({"message": "Income deleted successfully"})
+        else:
+            return HttpResponseNotAllowed(["DELETE"])
 
 
 class DeleteExpenseView(LoginRequiredMixin, View):
-    def get(self, request, expense_id):
+    def delete(self, request, expense_id):
         expense = get_object_or_404(Expense, id=expense_id)
         if expense.user == request.user:
             expense.delete()
-        return redirect("budget")
+            return JsonResponse({"message": "Expense deleted successfully"})
+        else:
+            return HttpResponseNotAllowed(["DELETE"])
 
 
 class DeleteInvestmentView(LoginRequiredMixin, View):
-    def get(self, request, investment_id):
+    def delete(self, request, investment_id):
         investment = get_object_or_404(Investment, id=investment_id)
         if investment.user == request.user:
             investment.delete()
-        return redirect("budget")
+            return JsonResponse({"message": "Investment deleted successfully"})
+        else:
+            return HttpResponseNotAllowed(["DELETE"])
 
 
 class GetUpdatedTotalsView(LoginRequiredMixin, View):
