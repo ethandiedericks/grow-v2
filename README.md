@@ -25,7 +25,7 @@ This repository contains the code for a Django-based budget management applicati
 
 ## Setup
 
-1. **Clone the Repository:** `git clone https://github.com/your-username/budget-app.git`
+1. **Clone the Repository:** `git clone https://github.com/ethandiedericks/grow-v2.git`
 2. **Create a Virtual Environment:** `python -m venv myenv`
 3. **Activate the Virtual Environment:** 
     - On Windows: `myenv\Scripts\activate`
