@@ -21,7 +21,7 @@ This repository contains the code for a Django-based budget management applicati
 - **Income Tracking:** Add and manage various sources of income, including future income projections.
 - **Expense Tracking:** Record and monitor different expenses, including future expenses.
 - **Investment Management:** Track investments made and future investment plans.
-- **User Authentication:** Utilizes Django's built-in authentication system for user-specific data management.
+- **User Authentication:** Utilizes django-allauth email authentication system for user-specific data management.
 
 ## Setup
 
