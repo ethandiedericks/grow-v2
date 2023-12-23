@@ -1,4 +1,4 @@
-# Flow (A Budget Management App)
+# Flow (Budget Management Web App)
 
 This Django-based budget app allows users to manage their income, expenses, and investments. It provides a platform to track various financial sources and transactions.
 
