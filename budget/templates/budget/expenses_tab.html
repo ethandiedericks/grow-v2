@@ -1,0 +1,42 @@
+{% load crispy_forms_tags %}
+<div class="tab-pane fade" id="expenses" role="tabpanel" aria-labelledby="expenses-tab">
+    <div class="container-fluid custom-container mt-4">
+        <h2 class="h4">Expenses</h2>
+        <form method="post" id="expenseForm" class="expense-form">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ expense_form.expense_name|as_crispy_field }}
+            </div>
+            <div class="form-group custom-expense-group d-none">
+                <small id="customIncomeHelp" class="form-text text-muted">Can't find your expense? Add it here:</small>
+                <input type="text" class="form-control" id="customExpense" name="custom_expense" placeholder="Enter your custom expense">
+            </div>
+            {{ expense_form.expense_amount|as_crispy_field }}
+            {{ expense_form.future_expense_date|as_crispy_field }}
+            <button type="submit" name="expense_submit" class="btn btn-danger">Add Expense</button>
+        </form>
+        <!-- display existing expenses -->
+        <div class="mt-4">
+            <h3 class="h5">Existing Expenses</h3>
+            <div class="row">
+                {% for expense in expenses %}
+                    <div class="col-md-6 mb-3">
+                        <div class="card delete-item" data-item-id="{{ expense.id }}" onclick="deleteItem('{{ expense.id }}', 'expense')">
+                            <div class="card-body">
+                                <h5 class="h5">{{ expense.expense_name }}</h5>
+                                <p class="h6 text-muted">Amount: {{ expense.expense_amount }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="col-md-12" id="existingExpensesContainer">
+                        <div class="card text-center p-3">
+                            <p class="text-muted mb-0">No existing expenses</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,43 @@
+{% load crispy_forms_tags %}
+<div class="tab-pane fade" id="investments" role="tabpanel" aria-labelledby="investments-tab">
+    <div class="container-fluid custom-container mt-4">
+        <h2 class="h4">Investments</h2>
+        <form method="post" id="investmentForm" class="investment-form">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ investment_form.investment_name|as_crispy_field }}
+            </div>
+            <div class="form-group custom-investment-group d-none">
+                <small id="customInvestmentHelp" class="form-text text-muted">Can't find your investment? Add it here:</small>
+                <input type="text" class="form-control" id="customInvestment" name="custom_investment" placeholder="Enter your custom investment">
+            </div>
+            {{ investment_form.investment_amount|as_crispy_field }}
+            {{ investment_form.future_investment_date|as_crispy_field }}
+            <button type="submit" name="investment_submit" class="btn btn-primary">Add Investment</button>
+        </form>
+        <!-- display existing investments -->
+        <div class="mt-4">
+            <h3 class="h5">Existing Investments</h3>
+            <div class="row">
+                {% for investment in investments %}
+                    <div class="col-md-6 mb-3">
+                        <div class="card delete-item" data-item-id="{{ investment.id }}" onclick="deleteItem('{{ investment.id }}', 'investment')">
+                            <div class="card-body">
+                                <h5 class="h5">{{ investment.investment_name }}</h5>
+                                <p class="h6 text-muted">Amount: {{ investment.investment_amount }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="col-md-12" id="existingInvestmentsContainer">
+                        <div class="card text-center p-3">
+                            <p class="text-muted mb-0">No existing investments</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+        </div>
+    </div>
+    
+</div>

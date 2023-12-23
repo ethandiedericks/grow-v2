@@ -1,8 +1,14 @@
+@media (min-width: 992px) {
+    .custom-container {
+        width: 500px;
+        margin: 0 auto; /* To center the container */
+    }
+}
 .budget-container {
-    background-color: #f8f9fa; /* Light gray color */
+    
     border-radius: 10px; /* Rounded corners */
     padding: 20px; /* Add some padding for better spacing */
-    margin: 20px auto; /* Center the container */
+    margin: 5px auto; /* Center the container */
     /* You might need to adjust the width if needed */
     max-width: 1400px; /* Adjust the width based on your design */
 }

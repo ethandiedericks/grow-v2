@@ -1,0 +1,43 @@
+{% load crispy_forms_tags %}
+<div class="tab-pane fade show active" id="income" role="tabpanel" aria-labelledby="income-tab">
+    <div class="container-fluid custom-container mt-4">
+        <h2 class="h4">Income Sources</h2>
+
+        <form method="post" id="incomeForm">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ income_form.income_name|as_crispy_field }}
+            </div>
+            <div class="form-group custom-income-group d-none">
+                <small id="customIncomeHelp" class="form-text text-muted">Can't find your income? Add it here:</small>
+                <input type="text" class="form-control" id="customIncome" name="custom_income" placeholder="Enter your custom income">
+            </div>
+            {{ income_form.income_amount|as_crispy_field }}
+            {{ income_form.future_income_date|as_crispy_field }}
+            <button type="submit" name="income_submit" class="btn btn-custom">Add Income</button>
+        </form>
+        <!-- display existing incomes -->
+        <div class="mt-4">
+            <h3 class="h5">Existing Incomes</h3>
+            <div class="row">
+                {% for income in incomes %}
+                    <div class="col-md-6 mb-3">
+                        <div class="card delete-item" data-item-id="{{ income.id }}" onclick="deleteItem('{{ income.id }}', 'income')">
+                            <div class="card-body">
+                                <h5 class="h5">{{ income.income_name }}</h5>
+                                <p class="text-muted h6">Amount: {{ income.income_amount }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="col-md-12" id="existingIncomesContainer">
+                        <div class="card text-center p-3">
+                            <p class="text-muted mb-0">No existing incomes</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+</div>

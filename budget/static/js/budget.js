@@ -15,9 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-});
 
-document.addEventListener('DOMContentLoaded', function() {
+
     var expenseTypeDropdown = document.getElementById('id_expense_name');
     var customExpenseGroup = document.querySelector('.custom-expense-group');
 
@@ -34,9 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-});
 
-document.addEventListener('DOMContentLoaded', function() {
     var investmentTypeDropdown = document.getElementById('id_investment_name');
     var customInvestmentGroup = document.querySelector('.custom-investment-group');
 
@@ -54,3 +51,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     } 
 });
+

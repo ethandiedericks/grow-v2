@@ -1,7 +1,7 @@
 {% load static %}
 
   <div class="container-fluid shadow-sm">
-    <nav class="navbar navbar-expand-md navbar-white bg-white">
+    <nav class="navbar navbar-expand-md navbar-white bg-white ">
       <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">
           <img src="{% static 'img/flow.png' %}" style="height: 50px; width: auto;" alt="Your Logo">
@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+              <a class="nav-link " href="{% url 'dashboard' %}">Dashboard</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'budget' %}">Budget</a>

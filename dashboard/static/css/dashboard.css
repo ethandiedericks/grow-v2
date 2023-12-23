@@ -70,3 +70,45 @@
     height:44.5vh; 
     width:100%;
 }
+
+.dashboard-container h1,
+.dashboard-container h2,
+.dashboard-container h3,
+.dashboard-container h4,
+.dashboard-container h5 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+  
+}
+
+.card {
+    padding: 20px; /* Adjust this value as needed */
+    margin-bottom: 20px; /* Adjust this value as needed */
+  }
+ 
+
+  .bg-dark 
+  .bg-primary 
+  .custom-income-background{
+    padding: 30px;
+  }
+    
+  /* Increase font size and spacing for readability */
+.form-select-lg {
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+  
+  /* Improve visual appeal with rounded corners and subtle shadow */
+  .form-select {
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Customize dropdown arrow */
+  .form-select::-ms-expand {
+    border: none;
+    background-color: transparent;
+  }
+  
+ 

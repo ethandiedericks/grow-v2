@@ -1,3 +1,5 @@
+
+
 function renderBarChart(labels, values, canvasId, chartLabel) {
     console.log('Bar Chart Data:', labels, values);
     var ctx = document.getElementById(canvasId).getContext('2d');
@@ -79,15 +81,27 @@ function renderPieOrDoughnutChart(labels, values, canvasId, chartType) {
             datasets: [{
                 label: 'Data',
                 data: filteredValues,
-                // Add styling or customization options here
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    // Add more colors as needed
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    // Add more colors as needed
+                ],
+                borderWidth: 1
             }]
+           
         }, 
         options: {
             responsive: true,
             maintainAspectRatio: false,
-        }
-        // Add additional options if needed
-    };
+        },
+};
 
     if (window[canvasId] instanceof Chart) {
         window[canvasId].destroy();
@@ -181,6 +195,7 @@ function fetchDataAndRenderLineCharts(url, canvasId, chartLabel) {
 
 
 function fetchDataAndRenderPieCharts(url) {
+
     fetch(url)
         .then(response => {
             if (!response.ok) {

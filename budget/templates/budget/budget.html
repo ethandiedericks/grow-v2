@@ -1,226 +1,51 @@
+
 {% extends '_base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block title %}
-    Budget
-{% endblock title %}
+{% block title %}Budget{% endblock title %}
 
-{% block content %} 
-<style>
-    @media (min-width: 992px) {
-        .custom-container {
-            width: 500px;
-            margin: 0 auto; /* To center the container */
-        }
-    }
-</style>
-<div class="budget-container shadow-sm">
-    <div class="row p-4">
-        <div class="text-center mb-4">
-            <h1 class="display-4">Manage Your Finances</h1>
+{% block content %}
+<div class="budget-container">
+    <header class="bg-light shadow-sm p-4 ">
+        <div class="container-fluid ">
+            <h1 class="display-4 text-center">Manage Your Finances</h1>
+        </div>
+    </header>
+
+    <main class="container-fluid py-4">
+        <ul class="nav nav-tabs nav-justified mb-4" id="financialTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link text-primary active" id="income-tab" data-toggle="tab" href="#income" role="tab" aria-controls="income" aria-selected="true" onclick="activateTab('income')">Income</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-primary" id="expenses-tab" data-toggle="tab" href="#expenses" role="tab" aria-controls="expenses" aria-selected="false" onclick="activateTab('expenses')">Expenses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-primary" id="investments-tab" data-toggle="tab" href="#investments" role="tab" aria-controls="investments" aria-selected="false" onclick="activateTab('investments')">Investments</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="financialTabsContent">
+            {% include "budget/income_tab.html" %}
+            {% include "budget/expenses_tab.html" %}
+            {% include "budget/investments_tab.html" %}
         </div>
 
-        <div class="col-md-12">
-            <ul class="nav nav-tabs justify-content-center" id="financialTabs" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active text-black" id="income-tab" data-toggle="tab" href="#income" role="tab" aria-controls="income" aria-selected="true" onclick="activateTab('income')">Income</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-black" id="expenses-tab" data-toggle="tab" href="#expenses" role="tab" aria-controls="expenses" aria-selected="false" onclick="activateTab('expenses')">Expenses</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-black" id="investments-tab" data-toggle="tab" href="#investments" role="tab" aria-controls="investments" aria-selected="false" onclick="activateTab('investments')">Investments</a>
-                </li>
-            </ul>
-
-            <div class="tab-content" id="financialTabsContent"">
-                <div class="tab-pane fade show active" id="income" role="tabpanel" aria-labelledby="income-tab">
-                    <div class="container-fluid custom-container mt-4">
-                        <h2 class="h4">Income Sources</h2>
-            
-                        <form method="post" id="incomeForm">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                {{ income_form.income_name|as_crispy_field }}
-                            </div>
-                            <div class="form-group custom-income-group d-none">
-                                <small id="customIncomeHelp" class="form-text text-muted">Can't find your income? Add it here:</small>
-                                <input type="text" class="form-control" id="customIncome" name="custom_income" placeholder="Enter your custom income">
-                            </div>
-                            {{ income_form.income_amount|as_crispy_field }}
-                            {{ income_form.future_income_date|as_crispy_field }}
-                            <button type="submit" name="income_submit" class="btn btn-custom">Add Income</button>
-                        </form>
-                        <!-- display existing incomes -->
-                        <div class="mt-4">
-                            <h3 class="h5">Existing Incomes</h3>
-                            <div class="row">
-                                {% for income in incomes %}
-                                    <div class="col-md-6 mb-3">
-                                        <div class="card delete-item" data-item-id="{{ income.id }}" onclick="deleteItem('{{ income.id }}', 'income')">
-                                            <div class="card-body">
-                                                <h5 class="h5">{{ income.income_name }}</h5>
-                                                <p class="text-muted h6">Amount: {{ income.income_amount }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% empty %}
-                                    <div class="col-md-12" id="existingIncomesContainer">
-                                        <div class="card text-center p-3">
-                                            <p class="text-muted mb-0">No existing incomes</p>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="tab-pane fade" id="expenses" role="tabpanel" aria-labelledby="expenses-tab">
-                    <div class="container-fluid custom-container mt-4">
-                        <h2 class="h4">Expenses</h2>
-                        <form method="post" id="expenseForm" class="expense-form">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                {{ expense_form.expense_name|as_crispy_field }}
-                            </div>
-                            <div class="form-group custom-expense-group d-none">
-                                <small id="customIncomeHelp" class="form-text text-muted">Can't find your expense? Add it here:</small>
-                                <input type="text" class="form-control" id="customExpense" name="custom_expense" placeholder="Enter your custom expense">
-                            </div>
-                            {{ expense_form.expense_amount|as_crispy_field }}
-                            {{ expense_form.future_expense_date|as_crispy_field }}
-                            <button type="submit" name="expense_submit" class="btn btn-danger">Add Expense</button>
-                        </form>
-                        <!-- display existing expenses -->
-                        <div class="mt-4">
-                            <h3 class="h5">Existing Expenses</h3>
-                            <div class="row">
-                                {% for expense in expenses %}
-                                    <div class="col-md-6 mb-3">
-                                        <div class="card delete-item" data-item-id="{{ expense.id }}" onclick="deleteItem('{{ expense.id }}', 'expense')">
-                                            <div class="card-body">
-                                                <h5 class="h5">{{ expense.expense_name }}</h5>
-                                                <p class="h6 text-muted">Amount: {{ expense.expense_amount }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% empty %}
-                                    <div class="col-md-12" id="existingExpensesContainer">
-                                        <div class="card text-center p-3">
-                                            <p class="text-muted mb-0">No existing expenses</p>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="tab-pane fade" id="investments" role="tabpanel" aria-labelledby="investments-tab">
-                    <div class="container-fluid custom-container mt-4">
-                        <h2 class="h4">Investments</h2>
-                        <form method="post" id="investmentForm" class="investment-form">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                {{ investment_form.investment_name|as_crispy_field }}
-                            </div>
-                            <div class="form-group custom-investment-group d-none">
-                                <small id="customInvestmentHelp" class="form-text text-muted">Can't find your investment? Add it here:</small>
-                                <input type="text" class="form-control" id="customInvestment" name="custom_investment" placeholder="Enter your custom investment">
-                            </div>
-                            {{ investment_form.investment_amount|as_crispy_field }}
-                            {{ investment_form.future_investment_date|as_crispy_field }}
-                            <button type="submit" name="investment_submit" class="btn btn-primary">Add Investment</button>
-                        </form>
-                        <!-- display existing investments -->
-                        <div class="mt-4">
-                            <h3 class="h5">Existing Investments</h3>
-                            <div class="row">
-                                {% for investment in investments %}
-                                    <div class="col-md-6 mb-3">
-                                        <div class="card delete-item" data-item-id="{{ investment.id }}" onclick="deleteItem('{{ investment.id }}', 'investment')">
-                                            <div class="card-body">
-                                                <h5 class="h5">{{ investment.investment_name }}</h5>
-                                                <p class="h6 text-muted">Amount: {{ investment.investment_amount }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% empty %}
-                                    <div class="col-md-12" id="existingInvestmentsContainer">
-                                        <div class="card text-center p-3">
-                                            <p class="text-muted mb-0">No existing investments</p>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
+        <div class="row">
+            <div class="col-md-4 p-4">
+                <h4 class="h6">Total Income: {{ total_income }}</h4>
+            </div>
+            <div class="col-md-4 p-4">
+                <h4 class="h6">Total Expenses: {{ total_expenses }}</h4>
+                <h4 class="h6">Remaining Balance: {{ remaining_balance }}</h4>
+            </div>
+            <div class="col-md-4 p-4">
+                <h4 class="h6">Total Investments: {{ total_investments }}</h4>
             </div>
         </div>
-    </div>
+    </main>
 </div>
 
-
-    <!-- <div class="row">
-        <div class="col-md-4 p-4" id="totalIncome">
-            <h4 class="h6">Total Income: {{ total_income }}</h4>
-        </div>
-        <div class="col-md-4 p-4" id="totalExpenses">
-            <h4 class="h6">Total Expenses: {{ total_expenses }}</h4>
-            <h4 class="h6">Remaining Balance: {{ remaining_balance }}</h4>
-        </div>
-        <div class="col-md-4 p-4" id="totalInvestments">
-            <h4 class="h6">Total Investments: {{ total_investments }}</h4>
-        </div>
-    </div> -->
-    <script>
-        
-        function deleteItem(itemId, itemType) {
-    fetch(`/delete_${itemType}/${itemId}/`, {
-        method: 'DELETE',
-        headers: {
-            'X-CSRFToken': '{{ csrf_token }}',
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (response.ok) {
-            const cardToRemove = document.querySelector(`.card[data-item-id="${itemId}"]`);
-            if (cardToRemove) {
-                cardToRemove.remove();
-
-                // Fetch updated totals after successful deletion
-                fetch('/get_updated_totals/')
-                    .then(response => response.json())
-                    .then(data => {
-                        // Update total income
-                        document.getElementById('totalIncome').innerHTML = `<h4 class="h6">Total Income: ${data.total_income}</h4>`;
-
-                        // Update total expenses and remaining balance
-                        document.getElementById('totalExpenses').innerHTML = `<h4 class="h6">Total Expenses: ${data.total_expenses}</h4><h4 class="h6">Remaining Balance: ${data.remaining_balance}</h4>`;
-
-                        // Update total investments
-                        document.getElementById('totalInvestments').innerHTML = `<h4 class="h6">Total Investments: ${data.total_investments}</h4>`;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching updated totals:', error);
-                    });
-            }
-        }
-    })
-    .catch(error => {
-        console.error('Error deleting item:', error);
-    });
-}
-
-function activateTab(tabId) {
-    $('#financialTabs a[href="#' + tabId + '"]').tab('show');
-}
-
-    </script>
-    
-{% endblock %}
+{% include "budget/scripts.html" %}
+{% endblock content %}
