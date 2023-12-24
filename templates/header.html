@@ -1,32 +1,32 @@
 {% load static %}
 
-  <div class="container-fluid shadow-sm">
-    <nav class="navbar navbar-expand-md navbar-white bg-white ">
-      <div class="container">
+  <div class="container-fluid shadow-sm text-bg-dark">
+    <nav class="navbar navbar-expand-md ">
+      <div class="container" >
         <a class="navbar-brand" href="{% url 'home' %}">
-          <img src="{% static 'img/flow.png' %}" style="height: 50px; width: auto;" alt="Your Logo">
+          <img src="{% static 'img/flow.png' %}" style="height: 50px; width: auto;" alt="Flow logo">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item">
-              <a class="nav-link " href="{% url 'dashboard' %}">Dashboard</a>
+        <div class="collapse navbar-collapse"  id="navbarNavDropdown">
+          <ul class="navbar-nav mx-auto" >
+            <li class="nav-item ">
+              <a class="nav-link text-white"href="{% url 'dashboard' %}">Dashboard</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'budget' %}">Budget</a>
+              <a class="nav-link text-white" href="{% url 'budget' %}">Budget</a>
             </li>
             <!-- Add other relevant business sections -->
           </ul>
           <ul class="navbar-nav">
             {% if user.is_authenticated %}
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   {{ user.username }}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                  <li><a class="dropdown-item " href="{% url 'account_logout' %}">Logout</a></li>
                 </ul>
               </li>
             {% else %}

@@ -3,6 +3,9 @@
 .custom-income-color {
     background-color: #28a745;
 }
+.bg-custom{
+    background-color: #28a745; 
+}
 .animated-card-content {
     opacity: 0;
     animation: fadeIn 1s forwards;
@@ -83,7 +86,6 @@
 
 .card {
     padding: 20px; /* Adjust this value as needed */
-    margin-bottom: 20px; /* Adjust this value as needed */
   }
  
 
@@ -112,3 +114,42 @@
   }
   
  
+.rounded-2 {
+    border-radius: var(--bs-border-radius)!important;
+}
+
+.bg-light-primary {
+    background-color: #86f8a0!important;
+}
+.text-primary {
+    color: #28a745!important;
+}
+.icon-shape {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+}
+.icon-md {
+    width: 2.5rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+}
+
+.mt-n22 {
+    margin-top: -10rem !important;
+  }
+  .pt-10{
+      padding-top: 7rem;
+  }
+  .pb-21{
+      padding-bottom: 7rem;
+  }
+  .px-5{
+      padding-left: 5rem;
+      padding-right: 5rem;
+  }
+  .mt-6{
+      margin-top: 6rem;
+  }
