@@ -31,7 +31,9 @@
 <body>
  
     {% if user.is_authenticated %}
-      {% include 'header.html' %}
+      {% if request.path != '/dashboard/' %}  <!-- Check if the current path is not the dashboard -->
+        {% include 'header.html' %}
+      {% endif %}
     {% endif %}
 
     {% block content %}
