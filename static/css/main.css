@@ -1,9 +1,7 @@
-@font-face {
-    font-family: 'Roboto';
-    src: url('/static/fonts/Roboto-Regular.ttf') format('truetype');
-    /* Add additional font weights and styles if needed */
-}
+*{
 
+  font-family: var(--bs-body-font-family);
+}
 
 /* prevent dropdown from going off-screen */
 @media (min-width: 992px) {
@@ -13,13 +11,15 @@
     }
   }
 
-  body {
-    font-family: 'Roboto', sans-serif;
-    /* Other styles for body */
+body {
+  font-family: var(--bs-body-font-family);
+  font-size: var(--bs-body-font-size);
+  font-weight: var(--bs-body-font-weight);
+  line-height: var(--bs-body-line-height);
 }
 
-h1, h2, h3 {
-    font-family: 'Roboto', sans-serif;
+h1, h2, h3, h4, h5, h6, span {
+  font-family: var(--bs-body-font-family);
     /* Other styles for headings */
 }
 
@@ -104,3 +104,4 @@ input:focus {
 .nav-link{
   font-weight: bold;
 }
+
