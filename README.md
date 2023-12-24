@@ -1,4 +1,4 @@
-# Budget App
+# Flow (Budget Management Web App)
 
 This Django-based budget app allows users to manage their income, expenses, and investments. It provides a platform to track various financial sources and transactions.
 
@@ -21,11 +21,11 @@ This repository contains the code for a Django-based budget management applicati
 - **Income Tracking:** Add and manage various sources of income, including future income projections.
 - **Expense Tracking:** Record and monitor different expenses, including future expenses.
 - **Investment Management:** Track investments made and future investment plans.
-- **User Authentication:** Utilizes Django's built-in authentication system for user-specific data management.
+- **User Authentication:** Utilizes django-allauth email authentication system for user-specific data management.
 
 ## Setup
 
-1. **Clone the Repository:** `git clone https://github.com/your-username/budget-app.git`
+1. **Clone the Repository:** `git clone https://github.com/ethandiedericks/grow-v2.git`
 2. **Create a Virtual Environment:** `python -m venv myenv`
 3. **Activate the Virtual Environment:** 
     - On Windows: `myenv\Scripts\activate`
