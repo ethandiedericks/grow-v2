@@ -4,14 +4,12 @@
         margin: 0 auto; /* To center the container */
     }
 }
-.budget-container {
+/* .budget-container {
     
-    border-radius: 10px; /* Rounded corners */
-    padding: 20px; /* Add some padding for better spacing */
-    margin: 5px auto; /* Center the container */
-    /* You might need to adjust the width if needed */
-    max-width: 1400px; /* Adjust the width based on your design */
-}
+    padding: 20px; 
+    margin: 5px auto;
+    max-width: 1400px; 
+} */
 
 .btn-custom {
     color: #fff;
@@ -58,7 +56,34 @@
 .budget-container h3,
 .budget-container h4,
 .budget-container h5 {
-    font-family: 'Roboto', sans-serif;
     font-weight: bold;
     color: #333;
+}
+
+.budget-container{
+    padding: 20px;
+}
+
+
+.budget-head h1{
+    color : #333333;
+}
+.inc-container,
+.exp-container,
+.invest-container{
+    padding: 30px;
+    border-radius: 10px;
+}
+
+
+.inc-container {
+    background: linear-gradient(45deg, #bbe4ba, #ffffff); /* Adjusted green gradient */
+}
+
+.exp-container {
+    background: linear-gradient(45deg, #e6a7ad, #ffffff); /* Adjusted red gradient */
+}
+
+.invest-container {
+    background: linear-gradient(45deg, #a5c8ff, #ffffff); /* Adjusted blue gradient */
 }

@@ -48,6 +48,10 @@
     transition: transform 0.3s ease-in-out; /* Adding a subtle animation effect */
 }
 
+.card {
+    padding: 20px; /* Adjust this value as needed */
+  }
+ 
 /* Styling for card titles */
 .card-title {
     font-size: 1.5rem;
@@ -74,20 +78,9 @@
     width:100%;
 }
 
-.dashboard-container h1,
-.dashboard-container h2,
-.dashboard-container h3,
-.dashboard-container h4,
-.dashboard-container h5 {
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
-  
-}
 
-.card {
-    padding: 20px; /* Adjust this value as needed */
-  }
- 
+
+
 
   .bg-dark 
   .bg-primary 
@@ -153,3 +146,10 @@
   .mt-6{
       margin-top: 6rem;
   }
+
+  /* Adjust spacing between list items */
+  .nav-item {
+    margin-bottom: 10px; /* You can adjust this value for your desired spacing */
+   
+  }
+  

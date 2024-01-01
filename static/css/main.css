@@ -1,7 +1,4 @@
-*{
 
-  font-family: var(--bs-body-font-family);
-}
 
 /* prevent dropdown from going off-screen */
 @media (min-width: 992px) {
@@ -11,17 +8,22 @@
     }
   }
 
-body {
-  font-family: var(--bs-body-font-family);
-  font-size: var(--bs-body-font-size);
-  font-weight: var(--bs-body-font-weight);
-  line-height: var(--bs-body-line-height);
+  /* Headers */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'BentonSans Regular', sans-serif;
+  /* Use fallback sans-serif in case BentonSans isn't available */
 }
 
-h1, h2, h3, h4, h5, h6, span {
-  font-family: var(--bs-body-font-family);
-    /* Other styles for headings */
+body {
+  font-family: 'HelveticaNeue-MediumCond', sans-serif;
+
+  
+  line-height: var(--bs-body-line-height);
 }
+strong{
+  font-family: 'HelveticaNeue-MediumCond', sans-serif;
+}
+
 
 input:focus {
     border-color: #28a745 !important; /* Change to your preferred shade of green */
@@ -50,9 +52,9 @@ input:focus {
 }
 .btn {
     margin-top: 20px;
-    padding: 10px 30px;
-    font-size: 18px;
-    border-radius: 30px;
+    padding: 10px 20px;
+    /* font-size: 15px; */
+    border-radius: 10px;
     transition: all 0.3s ease;
 }
 
@@ -101,7 +103,5 @@ input:focus {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
 }
-.nav-link{
-  font-weight: bold;
-}
+
 
