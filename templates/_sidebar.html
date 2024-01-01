@@ -5,15 +5,33 @@
     margin-bottom: 10px; /* You can adjust this value for your desired spacing */
    
   }
+
+  @media(max-width: 767px){
+ #side_nav{
+   margin-left: -250px;
+   position: absolute;
+   min-height: 100vh;
+   z-index: 1;
+
+ }
+ #side_nav.active{
+   margin-left: 0;
+  }
+}
 </style>
+
 <div class="col-md-3 m-0 p-0 d-md-flex flex-md-column">
     <div class="position-sticky top-0">
-        <div class="sidebar p-0" >
+        <div class="sidebar p-0" id="side_nav">
             <!-- Sidebar content -->
             <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="height: 100vh;">
+              
+
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none ">
                     <img src="{% static 'img/flow.png' %}" style="height: 50px; width: auto;" alt="Your Logo">
                 </a>
+                <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i class="fa-solid fa-bars-staggered"></i></button>
+           
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item" style="margin-top: 10px;">

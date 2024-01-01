@@ -6,33 +6,83 @@
 {% block title %}Budget{% endblock title %}
 
 {% block content %}
-<div class="budget-container">
-    <header class="bg-light shadow-sm p-4 ">
-        <div class="container-fluid ">
+<div class="container budget-container">
+    <header class="budget-head mt-5">
+        <div class="container ">
             <h1 class="display-4 text-center">Manage Your Finances</h1>
         </div>
     </header>
 
-    <main class="container-fluid py-4">
-        <ul class="nav nav-tabs nav-justified mb-4" id="financialTabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link text-primary active" id="income-tab" data-toggle="tab" href="#income" role="tab" aria-controls="income" aria-selected="true" onclick="activateTab('income')">Income</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-primary" id="expenses-tab" data-toggle="tab" href="#expenses" role="tab" aria-controls="expenses" aria-selected="false" onclick="activateTab('expenses')">Expenses</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-primary" id="investments-tab" data-toggle="tab" href="#investments" role="tab" aria-controls="investments" aria-selected="false" onclick="activateTab('investments')">Investments</a>
-            </li>
-        </ul>
-
-        <div class="tab-content" id="financialTabsContent">
-            {% include "budget/income_tab.html" %}
-            {% include "budget/expenses_tab.html" %}
-            {% include "budget/investments_tab.html" %}
-        </div>
-
+    <main class="container">
         <div class="row">
+            <div class="col-md-4 mt-5">
+                <div class="inc-container shadow">
+
+                    <h2 class="h4">Income Sources</h2>
+                    <form method="post" id="incomeForm">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{ income_form.income_name|as_crispy_field }}
+                        </div>
+                        <div class="form-group custom-income-group d-none">
+                            <small id="customIncomeHelp" class="form-text text-muted">Can't find your income? Add it here:</small>
+                            <input type="text" class="form-control" id="customIncome" name="custom_income" placeholder="Enter your custom income">
+                        </div>
+                        {{ income_form.income_amount|as_crispy_field }}
+                        {{ income_form.future_income_date|as_crispy_field }}
+                        <div class="d-flex">
+                            <button type="submit" name="income_submit" class="btn btn-custom">Add Income</button>
+                        </div>
+                        
+                    </form>
+  
+                </div>
+            </div>
+            <div class="col-md-4 mt-5">
+                <div class="exp-container shadow">
+
+                    <h2 class="h4">Expenses</h2>
+                    <form method="post" id="expenseForm" class="expense-form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{ expense_form.expense_name|as_crispy_field }}
+                        </div>
+                        <div class="form-group custom-expense-group d-none">
+                            <small id="customIncomeHelp" class="form-text text-muted">Can't find your expense? Add it here:</small>
+                            <input type="text" class="form-control" id="customExpense" name="custom_expense" placeholder="Enter your custom expense">
+                        </div>
+                        {{ expense_form.expense_amount|as_crispy_field }}
+                        {{ expense_form.future_expense_date|as_crispy_field }}
+                        <button type="submit" name="expense_submit" class="btn btn-danger">Add Expense</button>
+                    </form>
+
+                </div>
+            </div>
+            <div class="col-md-4 mt-5"> 
+                <div class="invest-container shadow">
+
+                    <h2 class="h4">Investments</h2>
+                    <form method="post" id="investmentForm" class="investment-form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{ investment_form.investment_name|as_crispy_field }}
+                        </div>
+                        <div class="form-group custom-investment-group d-none">
+                            <small id="customInvestmentHelp" class="form-text text-muted">Can't find your investment? Add it here:</small>
+                            <input type="text" class="form-control" id="customInvestment" name="custom_investment" placeholder="Enter your custom investment">
+                        </div>
+                        {{ investment_form.investment_amount|as_crispy_field }}
+                        {{ investment_form.future_investment_date|as_crispy_field }}
+                        <button type="submit" name="investment_submit" class="btn btn-primary">Add Investment</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+        <!-- <div class="row">
             <div class="col-md-4 p-4">
                 <h4 class="h6">Total Income: {{ total_income }}</h4>
             </div>
@@ -43,8 +93,8 @@
             <div class="col-md-4 p-4">
                 <h4 class="h6">Total Investments: {{ total_investments }}</h4>
             </div>
-        </div>
-    </main>
+        </div>  -->
+  
 </div>
 
 {% include "budget/scripts.html" %}

@@ -264,3 +264,4 @@ function fetchDataAndRenderBarCharts(url, canvasId, chartLabel) {
             console.error('There was a problem fetching the data or rendering the chart:', error);
         });
 }
+
