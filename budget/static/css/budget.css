@@ -75,7 +75,6 @@
     border-radius: 10px;
 }
 
-
 .inc-container {
     background: linear-gradient(45deg, #bbe4ba, #ffffff); /* Adjusted green gradient */
 }
@@ -87,3 +86,9 @@
 .invest-container {
     background: linear-gradient(45deg, #a5c8ff, #ffffff); /* Adjusted blue gradient */
 }
+
+.inc-badge{
+    background: #28a745;
+}
+
+
