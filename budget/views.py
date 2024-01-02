@@ -12,6 +12,7 @@ from .models import (
 )
 from django.views.generic import View, TemplateView
 from django.http import HttpResponseNotAllowed
+from django.db.models import Sum
 
 
 class HomePageView(TemplateView):
@@ -35,6 +36,16 @@ class BudgetView(LoginRequiredMixin, View):
             investment.investment_amount for investment in investments
         )
 
+        income_data = incomes.values("income_name").annotate(total=Sum("income_amount"))
+
+        expense_data = expenses.values("expense_name").annotate(
+            total=Sum("expense_amount")
+        )
+
+        investment_data = investments.values("investment_name").annotate(
+            total=Sum("investment_amount")
+        )
+
         return (
             total_income,
             total_expenses,
@@ -42,6 +53,9 @@ class BudgetView(LoginRequiredMixin, View):
             incomes,
             expenses,
             investments,
+            income_data,
+            expense_data,
+            investment_data,
         )
 
     def get(self, request):
@@ -53,6 +67,9 @@ class BudgetView(LoginRequiredMixin, View):
             incomes,
             expenses,
             investments,
+            income_data,
+            expense_data,
+            investment_data,
         ) = self.get_total_amounts(user)
 
         remaining_balance = total_income - total_expenses - total_investments
@@ -80,6 +97,9 @@ class BudgetView(LoginRequiredMixin, View):
             "total_expenses": total_expenses,
             "total_investments": total_investments,
             "remaining_balance": remaining_balance,
+            "income_data": income_data,
+            "expense_data": expense_data,
+            "investment_data": investment_data,
         }
         return render(request, self.template_name, context)
 

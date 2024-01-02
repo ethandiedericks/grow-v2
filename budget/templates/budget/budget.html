@@ -37,6 +37,25 @@
                     </form>
   
                 </div>
+
+                <!-- pill to display added incomes -->
+                <div class="row mt-3">
+                    {% for income in income_data %}
+                    <h6>{{income}}</h6>
+                    <div class="col-md-auto mt-2">
+                        <span class="badge inc-badge d-flex p-2 align-items-center rounded-pill" style="background-image: linear-gradient(to right, #28a745, #218838);">
+                            <span class="px-1">{{income.income_name}} - {{ income.total}}</span>
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free-->
+                                    <path fill="#ffffff" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/>
+                                </svg>
+                            </a>
+                        </span>
+                        
+                    </div>
+                    {% endfor %}
+                </div>
+                
             </div>
             <div class="col-md-4 mt-5">
                 <div class="exp-container shadow">
@@ -57,6 +76,24 @@
                     </form>
 
                 </div>
+
+                <!-- pill to display added expenses -->
+                <div class="row mt-3">
+                    {% for expense in expense_data %}
+                    
+                    <div class="col-md-auto mt-2">
+                        <span class="badge text-bg-danger d-flex p-2 align-items-center rounded-pill" style="background-image: linear-gradient(to right, #dc3545, #ff073a);">
+                            <span class="px-1">{{expense.expense_name }} - {{ expense.total }}</span>
+                            <a href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                    <path fill="#ffffff" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/>
+                                </svg>
+                            </a>
+                        </span>
+                        
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
             <div class="col-md-4 mt-5"> 
                 <div class="invest-container shadow">
@@ -75,7 +112,24 @@
                         {{ investment_form.future_investment_date|as_crispy_field }}
                         <button type="submit" name="investment_submit" class="btn btn-primary">Add Investment</button>
                     </form>
+                </div>
+                
+                <!-- pill to display added expenses -->
+                <div class="row mt-3">
+                    {% for investment in investment_data %}
                     
+                    <div class="col-md-auto mt-2">
+                        <span class="badge text-bg-primary d-flex p-2 align-items-center rounded-pill" style="background-image: linear-gradient(to right, #007bff, #6610f2);">
+                            <span class="px-1">{{investment.investment_name}} - {{ investment.total}}</span>
+                            <a href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                    <path fill="#ffffff" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/>
+                                </svg>
+                            </a>
+                        </span>
+                        
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
